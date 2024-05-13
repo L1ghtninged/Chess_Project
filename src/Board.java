@@ -1,73 +1,120 @@
-public class Board {
-    public int[] squares;
-    public static final String startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-    public Board(String fen){
-        this.squares = new int[64];
-        loadFromFEN(fen);
+import java.util.ArrayList;
+import java.util.HashMap;
 
+public class Board {
+    public int[] board;
+
+    public static final String startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    private HashMap<Integer, Character> pieceMap = new HashMap<>();
+    public Board(String fen){
+        this.board = new int[64];
+        loadFromFEN(fen);
+        initializeMap();
 
     }
     public Board(){
-        this.squares = new int[64];
+        this.board = new int[64];
+        initializeMap();
+    }
+
+
+    public void playMove(int piece, int position){
+        board[position] = board[piece];
+        board[piece] = Piece.none;
+    }
+    public void setPiece(int x, int y, int piece){
+        int index = Main.getIndex(x, y);
+        board[index] = piece;
+    }
+
+
+
+
+    public String toString(){
+        StringBuilder string = new StringBuilder();
+        for(int i = 7; i >= 0;i--){
+            for(int j = 0; j < 8; j++){
+                string.append(pieceMap.get(board[Main.getIndex(j, i)]));
+                string.append(" ");
+            }
+            string.append("\n");
+        }
+        return string.toString();
+    }
+
+    private void initializeMap(){
+        pieceMap.put(Piece.none, '*');
+        pieceMap.put(Piece.white|Piece.king, 'K');
+        pieceMap.put(Piece.white|Piece.queen, 'Q');
+        pieceMap.put(Piece.white|Piece.rook, 'R');
+        pieceMap.put(Piece.white|Piece.bishop, 'B');
+        pieceMap.put(Piece.white|Piece.knight, 'N');
+        pieceMap.put(Piece.white|Piece.pawn, 'P');
+        pieceMap.put(Piece.black|Piece.king, 'k');
+        pieceMap.put(Piece.black|Piece.queen, 'q');
+        pieceMap.put(Piece.black|Piece.rook, 'r');
+        pieceMap.put(Piece.black|Piece.bishop, 'b');
+        pieceMap.put(Piece.black|Piece.knight, 'n');
+        pieceMap.put(Piece.black|Piece.pawn, 'p');
     }
 
     public void loadFromFEN(String fen){
         char[]pos = fen.toCharArray();
         int file = 0;
-        int rank = 0;
+        int rank = 7;
 
         for (char c : pos) {
             switch (c) {
                 case '/':
                     file = 0;
-                    rank++;
+                    rank--;
                     break;
                 case 'k':
-                    squares[file+rank*8] = Piece.black|Piece.king;
+                    board[file+rank*8] = Piece.black|Piece.king;
                     file++;
                     break;
                 case 'n':
-                    squares[file+rank*8] = Piece.black|Piece.knight;
+                    board[file+rank*8] = Piece.black|Piece.knight;
                     file++;
                     break;
                 case 'r':
-                    squares[file+rank*8] = Piece.black|Piece.rook;
+                    board[file+rank*8] = Piece.black|Piece.rook;
                     file++;
                     break;
                 case 'b':
-                    squares[file+rank*8] = Piece.black|Piece.bishop;
+                    board[file+rank*8] = Piece.black|Piece.bishop;
                     file++;
                     break;
                 case 'q':
-                    squares[file+rank*8] = Piece.black|Piece.queen;
+                    board[file+rank*8] = Piece.black|Piece.queen;
                     file++;
                     break;
                 case 'p':
-                    squares[file+rank*8] = Piece.black|Piece.pawn;
+                    board[file+rank*8] = Piece.black|Piece.pawn;
                     file++;
                     break;
                 case 'K':
-                    squares[file+rank*8] = Piece.white|Piece.king;
+                    board[file+rank*8] = Piece.white|Piece.king;
                     file++;
                     break;
                 case 'N':
-                    squares[file+rank*8] = Piece.white|Piece.knight;
+                    board[file+rank*8] = Piece.white|Piece.knight;
                     file++;
                     break;
                 case 'R':
-                    squares[file+rank*8] = Piece.white|Piece.rook;
+                    board[file+rank*8] = Piece.white|Piece.rook;
                     file++;
                     break;
                 case 'B':
-                    squares[file+rank*8] = Piece.white|Piece.bishop;
+                    board[file+rank*8] = Piece.white|Piece.bishop;
                     file++;
                     break;
                 case 'Q':
-                    squares[file+rank*8] = Piece.white|Piece.queen;
+                    board[file+rank*8] = Piece.white|Piece.queen;
                     file++;
                     break;
                 case 'P':
-                    squares[file+rank*8] = Piece.white|Piece.pawn;
+                    board[file+rank*8] = Piece.white|Piece.pawn;
                     file++;
                     break;
                 case '1':
