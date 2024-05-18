@@ -34,42 +34,78 @@ public class Piece {
             if(chessboard.board[Main.getIndex(x,y+1)]==0){
 
                 if(y==6){
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y+1), Piece.white|Piece.bishop));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y+1), Piece.white|Piece.queen));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y+1), Piece.white|Piece.rook));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y+1), Piece.white|Piece.knight));
 
-                }
-                moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x,y+1)));
+                }else moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x,y+1)));
             }
             // Check if the pawn can move 2 squares forward
             if(chessboard.board[Main.getIndex(x,y+2)]==0 && chessboard.board[Main.getIndex(x,y+1)]==0 && y==1){
                 moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x,y+2)));
             }
             if(isValidSquare(x + 1, y + 1) && chessboard.board[Main.getIndex(x+1, y+1)]!=0 && !getColor(chessboard.board[Main.getIndex(x+1, y+1)])){
-                moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x+1,y+1)));
+                if(y==6){
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y+1), Piece.white|Piece.bishop));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y+1), Piece.white|Piece.queen));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y+1), Piece.white|Piece.rook));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y+1), Piece.white|Piece.knight));
+
+                }
+                else moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x+1,y+1)));
             }
-            if(isValidSquare(x - 1, y + 1) && chessboard.board[Main.getIndex(x+1, y+1)]!=0 && !getColor(chessboard.board[Main.getIndex(x-1, y+1)])){
-                moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x-1,y+1)));
+            if(isValidSquare(x - 1, y + 1) && chessboard.board[Main.getIndex(x-1, y+1)]!=0 && !getColor(chessboard.board[Main.getIndex(x-1, y+1)])){
+                if(y==6){
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.white|Piece.bishop));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.white|Piece.queen));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.white|Piece.rook));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.white|Piece.knight));
+
+                }
+                else moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x-1,y+1)));
             }
 
 
         }
         else{
             // Check if the pawn can move 1 square forward
-            if(chessboard.board[Main.getIndex(x,y+1)]==0){
+            if(chessboard.board[Main.getIndex(x,y-1)]==0){
 
                 if(y==1){
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y-1), Piece.black|Piece.queen));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y-1), Piece.black|Piece.bishop));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y-1), Piece.black|Piece.rook));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x, y-1), Piece.black|Piece.knight));
 
-                }
-                moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x,y+1)));
+                }else moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x,y-1)));
             }
             // Check if the pawn can move 2 squares forward
             if(chessboard.board[Main.getIndex(x,y-2)]==0 && chessboard.board[Main.getIndex(x,y-1)]==0 && y==6){
                 moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x,y-2)));
             }
-            if(isValidSquare(x + 1, y - 1) && chessboard.board[Main.getIndex(x+1, y-1)]!=0 && getColor(chessboard.board[Main.getIndex(x+1, y-1)])){
-                moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x+1,y-1)));
+            if(isValidSquare(x + 1, y - 1) && chessboard.board[Main.getIndex(x+1, y-1)]!=0 && !getColor(chessboard.board[Main.getIndex(x+1, y-1)])){
+                if(y==6){
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y-1), Piece.black|Piece.bishop));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y-1), Piece.black|Piece.queen));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y-1), Piece.black|Piece.rook));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x+1, y-1), Piece.black|Piece.knight));
+
+                }
+                else moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x+1,y-1)));
             }
-            if(isValidSquare(x - 1, y + 1) && chessboard.board[Main.getIndex(x+1, y+1)]!=0 && getColor(chessboard.board[Main.getIndex(x-1, y-1)])){
-                moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x-1,y-1)));
+            if(isValidSquare(x - 1, y - 1) && chessboard.board[Main.getIndex(x-1, y-1)]!=0 && !getColor(chessboard.board[Main.getIndex(x-1, y-1)])){
+                if(y==6){
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.black|Piece.bishop));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.black|Piece.queen));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.black|Piece.rook));
+                    moves.add(new Move(Main.getIndex(x, y), Main.getIndex(x-1, y+1), Piece.black|Piece.knight));
+
+                }
+                else moves.add(new Move(Main.getIndex(x,y), Main.getIndex(x-1,y-1)));
             }
+
+
         }
 
 

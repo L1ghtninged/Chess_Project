@@ -16,12 +16,25 @@ public class Board {
         this.board = new int[64];
         initializeMap();
     }
-
-
-    public void playMove(int piece, int position){
-        board[position] = board[piece];
-        board[piece] = Piece.none;
+    public void playMove(Move move){
+        if(MoveGenerator.generatePseudoLegalMoves(this).contains(move)){
+            makeMove(move);
+            MoveGenerator.setWhiteToMove(!MoveGenerator.isWhiteToMove());
+        }
+        else{
+            System.out.println(MoveGenerator.getPseudoMoves());
+            throw new IllegalArgumentException("Illegal move");
+        }
     }
+
+    public void makeMove(Move move){
+        board[move.getPositionIndex()] = board[move.getPieceIndex()];
+        board[move.getPieceIndex()] = Piece.none;
+        if(move.getPromotion()!=Piece.none){
+            board[move.getPositionIndex()] = move.getPromotion();
+        }
+    }
+
     public void setPiece(int x, int y, int piece){
         int index = Main.getIndex(x, y);
         board[index] = piece;

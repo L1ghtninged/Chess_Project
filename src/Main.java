@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
         Board board = new Board(Board.startPosition);
         System.out.println(board);
-        System.out.println(Piece.getPawnMoves(3, 5, board));
-
+        board.playMove(new Move(9, 18));
+        System.out.println(board);
 
 
 

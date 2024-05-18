@@ -1,16 +1,24 @@
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Move {
     private int pieceIndex;
     private int positionIndex;
-
+    private int promotion = 0;
 
     public Move(int pieceIndex, int positionIndex){
         this.pieceIndex = pieceIndex;
         this.positionIndex = positionIndex;
-
+    }
+    public Move(int pieceIndex, int positionIndex, int promotion){
+        this.pieceIndex = pieceIndex;
+        this.positionIndex = positionIndex;
+        this.promotion = promotion;
     }
 
+    public int getPromotion() {
+        return promotion;
+    }
 
     public int getPieceIndex() {
         return pieceIndex;
@@ -27,5 +35,18 @@ public class Move {
         int filePosition = Main.getFile(positionIndex); //4
         int rankPosition = Main.getRank(positionIndex); //2
         return Main.getSquare(Main.getIndex(filePiece, rankPiece))+"-"+Main.getSquare(Main.getIndex(filePosition, rankPosition));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Move move = (Move) o;
+        return pieceIndex == move.pieceIndex && positionIndex == move.positionIndex && promotion == move.promotion;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pieceIndex, positionIndex, promotion);
     }
 }
