@@ -20,9 +20,12 @@ public class Board {
         if(MoveGenerator.generatePseudoLegalMoves(this).contains(move)){
             makeMove(move);
             MoveGenerator.setWhiteToMove(!MoveGenerator.isWhiteToMove());
+            System.out.println(MoveGenerator.getPseudoMoves());
+            System.out.println("The move "+move+" was played.");
         }
         else{
             System.out.println(MoveGenerator.getPseudoMoves());
+            System.out.println(move);
             throw new IllegalArgumentException("Illegal move");
         }
     }
