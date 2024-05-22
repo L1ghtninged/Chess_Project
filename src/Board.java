@@ -15,6 +15,7 @@ public class Board implements Cloneable{
     public HashMap<Integer, Character> pieceMap = new HashMap<>();
 
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,16 +42,10 @@ public class Board implements Cloneable{
         initializeMap();
     }
 
-    public Board(Board b) {
-        this.board = b.board;
-        this.enPassantTarget = b.enPassantTarget;
-        this.isWhiteToMove = b.isWhiteToMove;
-        this.whiteCastlingQueen = b.whiteCastlingQueen;
-        this.whiteCastlingKing = b.whiteCastlingKing;
-        this.blackCastlingKing = b.blackCastlingKing;
-        this.blackCastlingQueen = b.blackCastlingQueen;
-        this.pieceMap = b.pieceMap;
-        this.game = b.game;
+    public Board(Board other) {
+        this.isWhiteToMove = other.isWhiteToMove;
+        this.board = other.board.clone();
+        // Clone other state variables as needed
     }
 
     public void playMove(Move move){

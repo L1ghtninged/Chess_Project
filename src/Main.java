@@ -8,7 +8,8 @@ public class Main {
         Board board = new Board();
         board.loadFromFEN(Board.startPosition);
         //board.loadFromFEN("rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1NnPP/RNBQK2R");
-
+        int numberOfPositions = moveGenerationTest(4, board);
+        System.out.println(numberOfPositions);
 
     }
 
@@ -16,6 +17,40 @@ public class Main {
         board.playMove(move);
         System.out.println(board);
     }
+    public static int moveGenerationTest(int depth, Board board) {
+        if (depth == 0) {
+            return 1;
+        }
+
+        int numPositions = 0;
+        ArrayList<Move> moves = MoveGenerator.generateLegalMoves(board.isWhiteToMove, board);
+        int[] positions = new int[20];
+        int i = 0;
+        for (Move move : moves) {
+
+            Board tmp = new Board(board); // Copy the board
+            tmp.makeMove(move); // Apply the move on the copied board
+            numPositions += moveGenerationTest(depth - 1, tmp); // Recursively count positions
+            if(depth == 3){
+                System.out.println(move + " " + numPositions);
+                positions[i] = numPositions;
+            }
+            i++;
+        }
+
+        for(int j = 0; j < positions.length; j++){
+            if(j!=0 && positions[j] !=0){
+                System.out.println(positions[j] - positions[j-1]);
+            }
+            else if(positions[j] != 0){
+                System.out.println(positions[j]);
+            }
+
+        }
+
+        return numPositions;
+    }
+
 
     public static int getRank(int square){
         return square/8;
@@ -65,8 +100,6 @@ public class Main {
         int file = fileMap.get(square.charAt(0));
         int rank = Integer.parseInt(String.valueOf(square.charAt(1)))-1;
         return getIndex(file, rank);
-
-
 
     }
 

@@ -82,12 +82,8 @@ public class MoveGenerator {
             if (!leavesKingInCheck(move, whiteToMove, chessboard)) {
                 legalMoves.add(move);
             }
-            else{
-                if(move.isEnPassant){
-                    System.out.println("En passant is illegal");
-                }
-            }
         }
+
         if(whiteToMove){
             if(chessboard.whiteCastlingKing){
                 if(checkWhiteCastlingKing(chessboard)){
@@ -174,4 +170,5 @@ public class MoveGenerator {
 
         return true;
     }
+
 }

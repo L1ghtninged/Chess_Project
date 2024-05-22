@@ -124,8 +124,6 @@ public class Piece {
             if (y == (whiteToMove ? 4 : 3) && Math.abs(x - enPassantX) == 1) {
                 Move m = new Move(Main.getIndex(x, y), chessboard.enPassantTarget, true);
                 moves.add(m);
-                System.out.println(m);
-                System.out.println(m.isEnPassant);
             }
         }
 
