@@ -1,41 +1,183 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
-public class Board {
+public class Board implements Cloneable{
+    public ArrayList<Move> game = new ArrayList<>();
     public int[] board;
+    public int enPassantTarget = -1;
+    public boolean isWhiteToMove = true;
+    public boolean whiteCastlingQueen = true;
+    public boolean whiteCastlingKing = true;
+    public boolean blackCastlingKing = true;
+    public boolean blackCastlingQueen = true;
+    public HashMap<Integer, Character> pieceMap = new HashMap<>();
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Board board1 = (Board) o;
+        return enPassantTarget == board1.enPassantTarget && isWhiteToMove == board1.isWhiteToMove && whiteCastlingQueen == board1.whiteCastlingQueen && whiteCastlingKing == board1.whiteCastlingKing && blackCastlingKing == board1.blackCastlingKing && blackCastlingQueen == board1.blackCastlingQueen && Arrays.equals(board, board1.board) && pieceMap.equals(board1.pieceMap);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(enPassantTarget, isWhiteToMove, whiteCastlingQueen, whiteCastlingKing, blackCastlingKing, blackCastlingQueen, pieceMap);
+        result = 31 * result + Arrays.hashCode(board);
+        return result;
+    }
 
     public static final String startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-    private HashMap<Integer, Character> pieceMap = new HashMap<>();
     public Board(String fen){
         this.board = new int[64];
         loadFromFEN(fen);
         initializeMap();
-
     }
     public Board(){
         this.board = new int[64];
         initializeMap();
     }
+
+    public Board(Board b) {
+        this.board = b.board;
+        this.enPassantTarget = b.enPassantTarget;
+        this.isWhiteToMove = b.isWhiteToMove;
+        this.whiteCastlingQueen = b.whiteCastlingQueen;
+        this.whiteCastlingKing = b.whiteCastlingKing;
+        this.blackCastlingKing = b.blackCastlingKing;
+        this.blackCastlingQueen = b.blackCastlingQueen;
+        this.pieceMap = b.pieceMap;
+        this.game = b.game;
+    }
+
     public void playMove(Move move){
-        if(MoveGenerator.generatePseudoLegalMoves(this).contains(move)){
+        ArrayList<Move> legalMoves = MoveGenerator.generateLegalMoves(isWhiteToMove, this);
+
+        if(legalMoves.contains(move)){
             makeMove(move);
-            MoveGenerator.setWhiteToMove(!MoveGenerator.isWhiteToMove());
-            System.out.println(MoveGenerator.getPseudoMoves());
-            System.out.println("The move "+move+" was played.");
+            System.out.println("The move " + move + " was played.");
         }
         else{
-            System.out.println(MoveGenerator.getPseudoMoves());
-            System.out.println(move);
             throw new IllegalArgumentException("Illegal move");
         }
     }
+    public void whiteCastlingKing(){
+        board[6] = Piece.king|Piece.white;
+        board[4] = Piece.none;
+        board[7] = Piece.none;
+        board[5] = Piece.rook|Piece.white;
+        whiteCastlingKing = false;
+        whiteCastlingQueen = false;
+    }
+    public void whiteCastlingQueen(){
+        board[4] = Piece.none;
+        board[0] = Piece.none;
+        board[2] = Piece.king|Piece.white;
+        board[3] = Piece.rook|Piece.white;
+        whiteCastlingKing = false;
+        whiteCastlingQueen = false;
+
+    }
+    public void blackCastlingKing(){
+        board[62] = Piece.king|Piece.black;
+        board[60] = Piece.none;
+        board[63] = Piece.none;
+        board[61] = Piece.rook|Piece.black;
+        blackCastlingKing = false;
+        blackCastlingQueen = false;
+    }
+    public void blackCastlingQueen(){
+        board[60] = Piece.none;
+        board[56] = Piece.none;
+        board[58] = Piece.king|Piece.black;
+        board[59] = Piece.rook|Piece.black;
+        blackCastlingKing = false;
+        blackCastlingQueen = false;
+    }
 
     public void makeMove(Move move){
+        //Board helpBoard = new Board(this.board, this.enPassantTarget, this.isWhiteToMove, this.whiteCastlingQueen, this.whiteCastlingKing, this.blackCastlingKing, this.blackCastlingQueen, this.pieceMap);
+
+        if(move.getPieceIndex()==4){
+            whiteCastlingQueen = false;
+            whiteCastlingKing = false;
+        }
+        else if(move.getPieceIndex() == 7){
+            whiteCastlingKing = false;
+        }
+        else if(move.getPieceIndex() == 0){
+            whiteCastlingQueen = false;
+        }
+        else if(move.getPositionIndex() == 0){
+            whiteCastlingQueen = false;
+        }
+        else if(move.getPositionIndex() == 7){
+            whiteCastlingKing = false;
+        }
+        else if(move.getPositionIndex() == 56){
+            blackCastlingQueen = false;
+        }
+        else if(move.getPositionIndex() == 63){
+            blackCastlingKing = false;
+        }
+        else if(move.getPieceIndex() == 60){
+            blackCastlingKing = false;
+            blackCastlingQueen = false;
+        }
+        else if(move.getPieceIndex() == 56){
+            blackCastlingQueen = false;
+        }
+        else if(move.getPieceIndex() == 63){
+            blackCastlingKing = false;
+        }
+
+        if(move.getCastling()==1){
+            if(isWhiteToMove){
+                whiteCastlingKing();
+            }
+            else{
+                blackCastlingKing();
+            }
+        }
+        else if(move.getCastling()==2){
+            if(isWhiteToMove){
+                whiteCastlingQueen();
+            }
+            else{
+                blackCastlingQueen();
+            }
+        }
+
         board[move.getPositionIndex()] = board[move.getPieceIndex()];
         board[move.getPieceIndex()] = Piece.none;
         if(move.getPromotion()!=Piece.none){
             board[move.getPositionIndex()] = move.getPromotion();
         }
+
+        else if (move.isEnPassant) {
+            int capturedPawnIndex = move.getPositionIndex() + (Piece.getColor(board[move.getPositionIndex()]) ? -8 : 8);
+            board[capturedPawnIndex] = Piece.none;
+        }
+
+        // Update en passant target square
+        enPassantTarget = -1;
+        int pieceType = board[move.getPositionIndex()] & 0b111;
+        if (pieceType == Piece.pawn) {
+            int startX = Main.getFile(move.getPieceIndex());
+            int endX = Main.getFile(move.getPositionIndex());
+            int startY = Main.getRank(move.getPieceIndex());
+            int endY = Main.getRank(move.getPositionIndex());
+
+            if (Math.abs(endY - startY) == 2) {
+                enPassantTarget = Main.getIndex(startX, (startY + endY) / 2);
+            }
+        }
+        isWhiteToMove = !isWhiteToMove;
+        game.add(move);
+        //return helpBoard;
     }
 
     public void setPiece(int x, int y, int piece){
@@ -75,6 +217,7 @@ public class Board {
     }
 
     public void loadFromFEN(String fen){
+        this.board = new int[64];
         char[]pos = fen.toCharArray();
         int file = 0;
         int rank = 7;
@@ -155,15 +298,18 @@ public class Board {
                     file += 7;
                     break;
                 default:
-                    ;
-
-
             }
-
-
         }
-
-
     }
 
+    @Override
+    public Board clone() {
+        try {
+            Board clone = (Board) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

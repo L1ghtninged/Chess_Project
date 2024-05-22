@@ -5,36 +5,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Board board = new Board(Board.startPosition);
-        board.playMove(new Move("e2","e4"));
-        System.out.println(board);
-        board.playMove(new Move("d7","d5"));
-        System.out.println(board);
-        board.playMove(new Move("e4","d5"));
-        System.out.println(board);
-        board.playMove(new Move("e7","e6"));
-        System.out.println(board);
-        board.playMove(new Move("d5","e6"));
-        System.out.println(board);
-        board.playMove(new Move("e8","e7"));
-        System.out.println(board);
-        board.playMove(new Move("e6","f7"));
-        System.out.println(board);
-        board.playMove(new Move("d8","e8"));
-        System.out.println(board);
-        board.playMove(new Move("f2","f3"));
-        System.out.println(board);
-        board.playMove(new Move("e7","d7"));
-        System.out.println(board);
-        board.playMove(new Move("h2", "h3"));
-        System.out.println(board);
-        board.playMove(new Move("f8", "c5"));
-        System.out.println(board);
-        board.playMove(new Move("f7", "f8", Piece.white|Piece.rook));
-        System.out.println(board);
+        Board board = new Board();
+        board.loadFromFEN(Board.startPosition);
+        //board.loadFromFEN("rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1NnPP/RNBQK2R");
+
+
     }
 
-
+    public static void playMove(Move move, Board board){
+        board.playMove(move);
+        System.out.println(board);
+    }
 
     public static int getRank(int square){
         return square/8;
