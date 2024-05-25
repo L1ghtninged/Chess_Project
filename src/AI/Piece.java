@@ -1,5 +1,5 @@
-import java.awt.*;
-import java.sql.SQLOutput;
+package AI;
+
 import java.util.ArrayList;
 
 public class Piece {

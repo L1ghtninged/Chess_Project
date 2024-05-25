@@ -1,4 +1,5 @@
-import java.util.HashMap;
+package AI;
+
 import java.util.Objects;
 
 public class Move {

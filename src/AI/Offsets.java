@@ -1,3 +1,5 @@
+package AI;
+
 public class Offsets {
     public static final int[][] KNIGHT_MOVES = {
             {2, 1}, {2, -1}, {-2, 1}, {-2, -1},

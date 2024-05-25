@@ -1,3 +1,5 @@
+package AI;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,6 +43,10 @@ public class Board implements Cloneable{
         this.board = new int[64];
         initializeMap();
     }
+    public Board(int[] board){
+        this.board = board;
+        initializeMap();
+    }
 
     public Board(Board other) {
         this.isWhiteToMove = other.isWhiteToMove;
@@ -53,48 +59,49 @@ public class Board implements Cloneable{
 
         if(legalMoves.contains(move)){
             makeMove(move);
-            System.out.println("The move " + move + " was played.");
+            System.out.println(legalMoves);
         }
         else{
+            System.out.println(legalMoves);
             throw new IllegalArgumentException("Illegal move");
         }
     }
     public void whiteCastlingKing(){
-        board[6] = Piece.king|Piece.white;
+        board[6] = Piece.king| Piece.white;
         board[4] = Piece.none;
         board[7] = Piece.none;
-        board[5] = Piece.rook|Piece.white;
+        board[5] = Piece.rook| Piece.white;
         whiteCastlingKing = false;
         whiteCastlingQueen = false;
     }
     public void whiteCastlingQueen(){
         board[4] = Piece.none;
         board[0] = Piece.none;
-        board[2] = Piece.king|Piece.white;
-        board[3] = Piece.rook|Piece.white;
+        board[2] = Piece.king| Piece.white;
+        board[3] = Piece.rook| Piece.white;
         whiteCastlingKing = false;
         whiteCastlingQueen = false;
 
     }
     public void blackCastlingKing(){
-        board[62] = Piece.king|Piece.black;
+        board[62] = Piece.king| Piece.black;
         board[60] = Piece.none;
         board[63] = Piece.none;
-        board[61] = Piece.rook|Piece.black;
+        board[61] = Piece.rook| Piece.black;
         blackCastlingKing = false;
         blackCastlingQueen = false;
     }
     public void blackCastlingQueen(){
         board[60] = Piece.none;
         board[56] = Piece.none;
-        board[58] = Piece.king|Piece.black;
-        board[59] = Piece.rook|Piece.black;
+        board[58] = Piece.king| Piece.black;
+        board[59] = Piece.rook| Piece.black;
         blackCastlingKing = false;
         blackCastlingQueen = false;
     }
 
     public void makeMove(Move move){
-        //Board helpBoard = new Board(this.board, this.enPassantTarget, this.isWhiteToMove, this.whiteCastlingQueen, this.whiteCastlingKing, this.blackCastlingKing, this.blackCastlingQueen, this.pieceMap);
+        //AI.Board helpBoard = new AI.Board(this.board, this.enPassantTarget, this.isWhiteToMove, this.whiteCastlingQueen, this.whiteCastlingKing, this.blackCastlingKing, this.blackCastlingQueen, this.pieceMap);
 
         if(move.getPieceIndex()==4){
             whiteCastlingQueen = false;
@@ -148,7 +155,7 @@ public class Board implements Cloneable{
 
         board[move.getPositionIndex()] = board[move.getPieceIndex()];
         board[move.getPieceIndex()] = Piece.none;
-        if(move.getPromotion()!=Piece.none){
+        if(move.getPromotion()!= Piece.none){
             board[move.getPositionIndex()] = move.getPromotion();
         }
 
@@ -197,18 +204,18 @@ public class Board implements Cloneable{
 
     private void initializeMap(){
         pieceMap.put(Piece.none, '*');
-        pieceMap.put(Piece.white|Piece.king, 'K');
-        pieceMap.put(Piece.white|Piece.queen, 'Q');
-        pieceMap.put(Piece.white|Piece.rook, 'R');
-        pieceMap.put(Piece.white|Piece.bishop, 'B');
-        pieceMap.put(Piece.white|Piece.knight, 'N');
-        pieceMap.put(Piece.white|Piece.pawn, 'P');
-        pieceMap.put(Piece.black|Piece.king, 'k');
-        pieceMap.put(Piece.black|Piece.queen, 'q');
-        pieceMap.put(Piece.black|Piece.rook, 'r');
-        pieceMap.put(Piece.black|Piece.bishop, 'b');
-        pieceMap.put(Piece.black|Piece.knight, 'n');
-        pieceMap.put(Piece.black|Piece.pawn, 'p');
+        pieceMap.put(Piece.white| Piece.king, 'K');
+        pieceMap.put(Piece.white| Piece.queen, 'Q');
+        pieceMap.put(Piece.white| Piece.rook, 'R');
+        pieceMap.put(Piece.white| Piece.bishop, 'B');
+        pieceMap.put(Piece.white| Piece.knight, 'N');
+        pieceMap.put(Piece.white| Piece.pawn, 'P');
+        pieceMap.put(Piece.black| Piece.king, 'k');
+        pieceMap.put(Piece.black| Piece.queen, 'q');
+        pieceMap.put(Piece.black| Piece.rook, 'r');
+        pieceMap.put(Piece.black| Piece.bishop, 'b');
+        pieceMap.put(Piece.black| Piece.knight, 'n');
+        pieceMap.put(Piece.black| Piece.pawn, 'p');
     }
 
     public void loadFromFEN(String fen){
@@ -224,51 +231,51 @@ public class Board implements Cloneable{
                     rank--;
                     break;
                 case 'k':
-                    board[file+rank*8] = Piece.black|Piece.king;
+                    board[file+rank*8] = Piece.black| Piece.king;
                     file++;
                     break;
                 case 'n':
-                    board[file+rank*8] = Piece.black|Piece.knight;
+                    board[file+rank*8] = Piece.black| Piece.knight;
                     file++;
                     break;
                 case 'r':
-                    board[file+rank*8] = Piece.black|Piece.rook;
+                    board[file+rank*8] = Piece.black| Piece.rook;
                     file++;
                     break;
                 case 'b':
-                    board[file+rank*8] = Piece.black|Piece.bishop;
+                    board[file+rank*8] = Piece.black| Piece.bishop;
                     file++;
                     break;
                 case 'q':
-                    board[file+rank*8] = Piece.black|Piece.queen;
+                    board[file+rank*8] = Piece.black| Piece.queen;
                     file++;
                     break;
                 case 'p':
-                    board[file+rank*8] = Piece.black|Piece.pawn;
+                    board[file+rank*8] = Piece.black| Piece.pawn;
                     file++;
                     break;
                 case 'K':
-                    board[file+rank*8] = Piece.white|Piece.king;
+                    board[file+rank*8] = Piece.white| Piece.king;
                     file++;
                     break;
                 case 'N':
-                    board[file+rank*8] = Piece.white|Piece.knight;
+                    board[file+rank*8] = Piece.white| Piece.knight;
                     file++;
                     break;
                 case 'R':
-                    board[file+rank*8] = Piece.white|Piece.rook;
+                    board[file+rank*8] = Piece.white| Piece.rook;
                     file++;
                     break;
                 case 'B':
-                    board[file+rank*8] = Piece.white|Piece.bishop;
+                    board[file+rank*8] = Piece.white| Piece.bishop;
                     file++;
                     break;
                 case 'Q':
-                    board[file+rank*8] = Piece.white|Piece.queen;
+                    board[file+rank*8] = Piece.white| Piece.queen;
                     file++;
                     break;
                 case 'P':
-                    board[file+rank*8] = Piece.white|Piece.pawn;
+                    board[file+rank*8] = Piece.white| Piece.pawn;
                     file++;
                     break;
                 case '1':

@@ -1,8 +1,10 @@
+package AI;
+
 import java.util.ArrayList;
 
 public class MoveGenerator {
 
-    private static int findKingPosition(int[] board, int color) {
+    public static int findKingPosition(int[] board, int color) {
         for (int i = 0; i < board.length; i++) {
             int piece = board[i];
             if ((piece & 0b111) == Piece.king && (piece & (Piece.white | Piece.black)) == color) {
@@ -14,12 +16,12 @@ public class MoveGenerator {
 
     public static boolean leavesKingInCheck(Move move, boolean whiteToMove, Board chessboard) {
         int[] board = chessboard.board;
-        int[] tempBoard = board.clone(); // Clone the board to simulate the move
+        int[] tempBoard = board.clone();
 
         makeMove(tempBoard, move);
-
+        Board b = new Board(tempBoard);
         int kingPos = findKingPosition(tempBoard, whiteToMove ? Piece.white : Piece.black);
-        return isSquareAttacked(chessboard, kingPos, !whiteToMove);
+        return isSquareAttacked(b, kingPos, !whiteToMove);
     }
     public static boolean isSquareAttacked(Board chessboard, int squareIndex, boolean byWhite) {
         int[] board = chessboard.board;
@@ -33,10 +35,37 @@ public class MoveGenerator {
         return false;
     }
     private static void makeMove(int[] board, Move move) {
+        // Update the board with the move
         board[move.getPositionIndex()] = board[move.getPieceIndex()];
         board[move.getPieceIndex()] = Piece.none;
 
+        // Handle promotions
+        if (move.getPromotion() != 0) {
+            board[move.getPositionIndex()] = move.getPromotion();
+        }
+
+        // Handle en passant
+        if (move.isEnPassant) {
+            int captureIndex = move.getPositionIndex() + (board[move.getPieceIndex()] == (Piece.pawn | Piece.white) ? -8 : 8);
+            board[captureIndex] = Piece.none;
+        }
+
+        // Handle castling
+        if (move.getCastling() > 0) {
+            if (move.getCastling() == 1) {
+                int rookFrom = move.getPositionIndex() + 1;
+                int rookTo = move.getPositionIndex() - 1;
+                board[rookTo] = board[rookFrom];
+                board[rookFrom] = Piece.none;
+            } else if (move.getCastling() == 2) {
+                int rookFrom = move.getPositionIndex() - 2;
+                int rookTo = move.getPositionIndex() + 1;
+                board[rookTo] = board[rookFrom];
+                board[rookFrom] = Piece.none;
+            }
+        }
     }
+
 
     public static ArrayList<Move> generatePseudoLegalMoves(Board chessboard, boolean whiteToMove){
         ArrayList<Move> pseudoMoves = new ArrayList<>();

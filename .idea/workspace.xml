@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="2nd commit">
-      <change afterPath="$PROJECT_DIR$/text.txt" afterDir="false" />
+    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="5th commit">
+      <change afterPath="$PROJECT_DIR$/blackBishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackKing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackKnight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackPawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackQueen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackRook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AI/AI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AI/ChessGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AI/GameFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AI/GamePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AI/SettingsPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AI/Square.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whiteBishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whiteKing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whiteKnight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whitePawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whiteQueen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whiteRook.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MoveGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MoveGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MoveGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/MoveGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Offsets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Offsets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Piece.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,24 +47,27 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2dlqHqecU2Qf7PyWuvvfMQqKuwr" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="AI.Main" />
       <module name="Chess_Project" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -87,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716053638419</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="4th commit, added pseudo-legal moves.">
+      <created>1716142764047</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1716142764047</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,9 +131,11 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First commit" />
     <MESSAGE value="3rd commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="3rd commit" />
+    <MESSAGE value="4th commit, added pseudo-legal moves." />
+    <option name="LAST_COMMIT_MESSAGE" value="4th commit, added pseudo-legal moves." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
