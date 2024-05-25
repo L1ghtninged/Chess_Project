@@ -6,13 +6,21 @@ import java.awt.event.MouseListener;
 
 public class Square extends Rectangle{
 
-
+    boolean isTargetSquare = false;
     public Square(int x, int y, Graphics g, boolean isWhite) {
         this.x = x;
         this.y = y;
         this.width = GamePanel.SIZE;
         this.height = GamePanel.SIZE;
         draw(g, isWhite);
+    }
+    public Square(int x, int y, Graphics g, boolean isWhite, boolean isTargetSquare){
+        this.x = x;
+        this.y = y;
+        this.width = GamePanel.SIZE;
+        this.height = GamePanel.SIZE;
+        this.isTargetSquare = isTargetSquare;
+        drawColor(g, isWhite);
     }
 
     public void draw(Graphics g, boolean isWhite) {
@@ -23,5 +31,13 @@ public class Square extends Rectangle{
         }
         g.fillRect(x, y, width, height);
 
+    }
+    public void drawColor(Graphics g, boolean isWhite){
+        if (isWhite) {
+            g.setColor(new Color(229, 252, 116));
+        } else {
+            g.setColor(new Color(153, 169, 81));
+        }
+        g.fillRect(x, y, width, height);
     }
 }

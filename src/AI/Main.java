@@ -1,10 +1,14 @@
 package AI;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
+        ChessGame game = new ChessGame();
+
+        GameFrame gameFrame = new GameFrame(game);
 
 
     }
@@ -19,12 +23,19 @@ public class Main {
             return 1;
         }
 
+
         int numPositions = 0;
+        int castlings = 0;
         ArrayList<Move> moves = MoveGenerator.generateLegalMoves(board.isWhiteToMove, board);
         for (Move move : moves) {
-
             Board tmp = new Board(board); // Copy the board
             tmp.makeMove(move); // Apply the move on the copied board
+            if(depth == 2){
+
+                System.out.println("Move is: "+move);
+                System.out.println(MoveGenerator.generateLegalMoves(tmp.isWhiteToMove, tmp));
+                System.out.println(MoveGenerator.generateLegalMoves(tmp.isWhiteToMove, tmp).size());
+            }
             numPositions += moveGenerationTest(depth - 1, tmp); // Recursively count positions
         }
 

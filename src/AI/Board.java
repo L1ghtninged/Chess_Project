@@ -58,7 +58,9 @@ public class Board implements Cloneable{
         ArrayList<Move> legalMoves = MoveGenerator.generateLegalMoves(isWhiteToMove, this);
 
         if(legalMoves.contains(move)){
+            System.out.println(board[0]);
             makeMove(move);
+            System.out.println(board[0]);
             System.out.println(legalMoves);
         }
         else{
@@ -152,9 +154,10 @@ public class Board implements Cloneable{
                 blackCastlingQueen();
             }
         }
-
-        board[move.getPositionIndex()] = board[move.getPieceIndex()];
-        board[move.getPieceIndex()] = Piece.none;
+        else{
+            board[move.getPositionIndex()] = board[move.getPieceIndex()];
+            board[move.getPieceIndex()] = Piece.none;
+        }
         if(move.getPromotion()!= Piece.none){
             board[move.getPositionIndex()] = move.getPromotion();
         }
