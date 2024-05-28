@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class Board implements Cloneable{
-    public ArrayList<Move> game = new ArrayList<>();
     public int[] board;
     public int enPassantTarget = -1;
     public boolean isWhiteToMove = true;
@@ -35,12 +34,11 @@ public class Board implements Cloneable{
 
     public static final String startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
     public Board(String fen){
-        this.board = new int[64];
-        loadFromFEN(fen);
+        this.board = Main.loadFromFEN(fen);
         initializeMap();
     }
     public Board(){
-        this.board = new int[64];
+        this.board = Main.loadFromFEN(startPosition);
         initializeMap();
     }
     public Board(int[] board){
@@ -49,22 +47,23 @@ public class Board implements Cloneable{
     }
 
     public Board(Board other) {
-        this.isWhiteToMove = other.isWhiteToMove;
-        this.board = other.board.clone();
-        // Clone other state variables as needed
+            this.board = other.board.clone();
+            this.enPassantTarget = other.enPassantTarget;
+            this.isWhiteToMove = other.isWhiteToMove;
+            this.whiteCastlingQueen = other.whiteCastlingQueen;
+            this.whiteCastlingKing = other.whiteCastlingKing;
+            this.blackCastlingKing = other.blackCastlingKing;
+            this.blackCastlingQueen = other.blackCastlingQueen;
+            this.pieceMap = new HashMap<>(other.pieceMap);
     }
 
     public void playMove(Move move){
         ArrayList<Move> legalMoves = MoveGenerator.generateLegalMoves(isWhiteToMove, this);
 
         if(legalMoves.contains(move)){
-            System.out.println(board[0]);
             makeMove(move);
-            System.out.println(board[0]);
-            System.out.println(legalMoves);
         }
         else{
-            System.out.println(legalMoves);
             throw new IllegalArgumentException("Illegal move");
         }
     }
@@ -180,8 +179,7 @@ public class Board implements Cloneable{
                 enPassantTarget = Main.getIndex(startX, (startY + endY) / 2);
             }
         }
-        isWhiteToMove = !isWhiteToMove;
-        game.add(move);
+        isWhiteToMove = !isWhiteToMove;;
         //return helpBoard;
     }
 
@@ -203,6 +201,8 @@ public class Board implements Cloneable{
             string.append("\n");
         }
         return string.toString();
+
+
     }
 
     private void initializeMap(){
@@ -220,98 +220,24 @@ public class Board implements Cloneable{
         pieceMap.put(Piece.black| Piece.knight, 'n');
         pieceMap.put(Piece.black| Piece.pawn, 'p');
     }
-
-    public void loadFromFEN(String fen){
-        this.board = new int[64];
-        char[]pos = fen.toCharArray();
-        int file = 0;
-        int rank = 7;
-
-        for (char c : pos) {
-            switch (c) {
-                case '/':
-                    file = 0;
-                    rank--;
-                    break;
-                case 'k':
-                    board[file+rank*8] = Piece.black| Piece.king;
-                    file++;
-                    break;
-                case 'n':
-                    board[file+rank*8] = Piece.black| Piece.knight;
-                    file++;
-                    break;
-                case 'r':
-                    board[file+rank*8] = Piece.black| Piece.rook;
-                    file++;
-                    break;
-                case 'b':
-                    board[file+rank*8] = Piece.black| Piece.bishop;
-                    file++;
-                    break;
-                case 'q':
-                    board[file+rank*8] = Piece.black| Piece.queen;
-                    file++;
-                    break;
-                case 'p':
-                    board[file+rank*8] = Piece.black| Piece.pawn;
-                    file++;
-                    break;
-                case 'K':
-                    board[file+rank*8] = Piece.white| Piece.king;
-                    file++;
-                    break;
-                case 'N':
-                    board[file+rank*8] = Piece.white| Piece.knight;
-                    file++;
-                    break;
-                case 'R':
-                    board[file+rank*8] = Piece.white| Piece.rook;
-                    file++;
-                    break;
-                case 'B':
-                    board[file+rank*8] = Piece.white| Piece.bishop;
-                    file++;
-                    break;
-                case 'Q':
-                    board[file+rank*8] = Piece.white| Piece.queen;
-                    file++;
-                    break;
-                case 'P':
-                    board[file+rank*8] = Piece.white| Piece.pawn;
-                    file++;
-                    break;
-                case '1':
-                    file++;
-                    break;
-                case '2':
-                    file += 2;
-                    break;
-                case '3':
-                    file += 3;
-                    break;
-                case '4':
-                    file += 4;
-                    break;
-                case '5':
-                    file += 5;
-                    break;
-                case '6':
-                    file += 6;
-                    break;
-                case '7':
-                    file += 7;
-                    break;
-                default:
-            }
-        }
-    }
-
     @Override
     public Board clone() {
         try {
             Board clone = (Board) super.clone();
-            // TODO: copy mutable state here, so the clone can't change the internals of the original
+
+            // Deep copy of the board array
+            clone.board = this.board.clone();
+            // Deep copy of the piece map
+            clone.pieceMap = new HashMap<>(this.pieceMap);
+
+            // Copy the remaining primitive fields
+            clone.enPassantTarget = this.enPassantTarget;
+            clone.isWhiteToMove = this.isWhiteToMove;
+            clone.whiteCastlingQueen = this.whiteCastlingQueen;
+            clone.whiteCastlingKing = this.whiteCastlingKing;
+            clone.blackCastlingKing = this.blackCastlingKing;
+            clone.blackCastlingQueen = this.blackCastlingQueen;
+
             return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();

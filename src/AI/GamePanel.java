@@ -133,7 +133,6 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
             }
         }
         targetSquare = -1;
-        System.out.println(game.board);
         repaint();
         settingsPanel.updatePromotionImage();
     }
@@ -148,8 +147,6 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         } else if (targetSquare != -1) {
             movePiece(targetSquare, Main.getIndex(x, y));
         }
-        System.out.println("Target square " + targetSquare);
-        System.out.println("Piece " + piece);
         repaint();
     }
 
@@ -163,10 +160,13 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        int x = e.getX() / SIZE;
-        int y = e.getY() / SIZE;
-        y = 7 - y;
-        selectedSquare(x, y);
+        if(e.getButton() == MouseEvent.BUTTON1){
+            int x = e.getX() / SIZE;
+            int y = e.getY() / SIZE;
+            y = 7 - y;
+            selectedSquare(x, y);
+        }
+
     }
 
     @Override
@@ -184,6 +184,12 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == 37){
+            if(game.boards.size()>1){
+                game.undoMove();
+                repaint();
+            }
+        }
         if(e.getKeyCode() == 38){
             if(game.chosenPromotion == 3){
                 game.chosenPromotion = 0;
@@ -191,7 +197,6 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
             else{
                 game.chosenPromotion++;
             }
-            System.out.println(game.chosenPromotion);
         }
         else if(e.getKeyCode() == 40){
             if(game.chosenPromotion == 0){
@@ -200,7 +205,6 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
             else{
                 game.chosenPromotion--;
             }
-            System.out.println(game.chosenPromotion);
         }
         settingsPanel.updatePromotionImage();
     }

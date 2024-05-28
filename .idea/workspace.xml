@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Added graphics">
+    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Castling bug fixed, promotion choosing added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/AI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/ChessGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/ChessGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/GameFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/SettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/SettingsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Square.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716642230179</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Castling bug fixed, promotion choosing added.">
+      <created>1716672074245</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716672074245</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -126,7 +131,8 @@
     <MESSAGE value="3rd commit" />
     <MESSAGE value="4th commit, added pseudo-legal moves." />
     <MESSAGE value="Added graphics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added graphics" />
+    <MESSAGE value="Castling bug fixed, promotion choosing added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Castling bug fixed, promotion choosing added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

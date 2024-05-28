@@ -11,13 +11,11 @@ public class ChessGame {
     public ChessGame(){
         this.board = new Board();
         setUpPromotion();
-        board.loadFromFEN(Board.startPosition);
         boards.add(board);
     }
     public ChessGame(String fen){
-        this.board = new Board();
+        this.board = new Board(fen);
         setUpPromotion();
-        board.loadFromFEN(fen);
         boards.add(board);
     }
     public void setUpPromotion(){
@@ -29,7 +27,8 @@ public class ChessGame {
         chosenPromotion = 0;
     }
     public void undoMove(){
-        board = boards.get(boards.indexOf(board)-1);
+        boards.remove(boards.size()-1);
+        board = boards.get(boards.size()-1);
     }
     public void redoMove(){
         board = boards.get(boards.indexOf(board)+1);
@@ -37,9 +36,9 @@ public class ChessGame {
 
     public void playMove(Move move){
         Board b = board.clone();
-        b.playMove(move);
-        boards.add(b);
-        board = b;
+        board.playMove(move);
+        boards.add(boards.size()-1, b);
+
 
     }
 

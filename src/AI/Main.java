@@ -6,9 +6,20 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        ChessGame game = new ChessGame();
 
-        GameFrame gameFrame = new GameFrame(game);
+
+        ChessGame game = new ChessGame("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+
+        // Set up the board with the given moves
+        game.playMove(new Move("e2", "e4"));
+        game.playMove(new Move("e7", "e5"));
+        game.playMove(new Move("g1", "f3"));
+        game.playMove(new Move("d8", "h4"));
+
+        // Find and print the best move at depth 2
+        int depth = 5;
+        Move bestMove = AI.findBestMove(game.board, depth);
+        System.out.println("Best move at depth " + depth + ": " + bestMove);
 
 
     }
@@ -25,17 +36,10 @@ public class Main {
 
 
         int numPositions = 0;
-        int castlings = 0;
         ArrayList<Move> moves = MoveGenerator.generateLegalMoves(board.isWhiteToMove, board);
         for (Move move : moves) {
             Board tmp = new Board(board); // Copy the board
             tmp.makeMove(move); // Apply the move on the copied board
-            if(depth == 2){
-
-                System.out.println("Move is: "+move);
-                System.out.println(MoveGenerator.generateLegalMoves(tmp.isWhiteToMove, tmp));
-                System.out.println(MoveGenerator.generateLegalMoves(tmp.isWhiteToMove, tmp).size());
-            }
             numPositions += moveGenerationTest(depth - 1, tmp); // Recursively count positions
         }
 
@@ -92,6 +96,92 @@ public class Main {
         int rank = Integer.parseInt(String.valueOf(square.charAt(1)))-1;
         return getIndex(file, rank);
 
+    }
+    public static int[] loadFromFEN(String fen){
+        int[] board = new int[64];
+        char[]pos = fen.toCharArray();
+        int file = 0;
+        int rank = 7;
+
+        for (char c : pos) {
+            switch (c) {
+                case '/':
+                    file = 0;
+                    rank--;
+                    break;
+                case 'k':
+                    board[file+rank*8] = Piece.black| Piece.king;
+                    file++;
+                    break;
+                case 'n':
+                    board[file+rank*8] = Piece.black| Piece.knight;
+                    file++;
+                    break;
+                case 'r':
+                    board[file+rank*8] = Piece.black| Piece.rook;
+                    file++;
+                    break;
+                case 'b':
+                    board[file+rank*8] = Piece.black| Piece.bishop;
+                    file++;
+                    break;
+                case 'q':
+                    board[file+rank*8] = Piece.black| Piece.queen;
+                    file++;
+                    break;
+                case 'p':
+                    board[file+rank*8] = Piece.black| Piece.pawn;
+                    file++;
+                    break;
+                case 'K':
+                    board[file+rank*8] = Piece.white| Piece.king;
+                    file++;
+                    break;
+                case 'N':
+                    board[file+rank*8] = Piece.white| Piece.knight;
+                    file++;
+                    break;
+                case 'R':
+                    board[file+rank*8] = Piece.white| Piece.rook;
+                    file++;
+                    break;
+                case 'B':
+                    board[file+rank*8] = Piece.white| Piece.bishop;
+                    file++;
+                    break;
+                case 'Q':
+                    board[file+rank*8] = Piece.white| Piece.queen;
+                    file++;
+                    break;
+                case 'P':
+                    board[file+rank*8] = Piece.white| Piece.pawn;
+                    file++;
+                    break;
+                case '1':
+                    file++;
+                    break;
+                case '2':
+                    file += 2;
+                    break;
+                case '3':
+                    file += 3;
+                    break;
+                case '4':
+                    file += 4;
+                    break;
+                case '5':
+                    file += 5;
+                    break;
+                case '6':
+                    file += 6;
+                    break;
+                case '7':
+                    file += 7;
+                    break;
+                default:
+            }
+        }
+        return board;
     }
 
 }
