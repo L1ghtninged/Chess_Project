@@ -198,6 +198,10 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
                 game.chosenPromotion++;
             }
         }
+        if(e.getKeyCode() == 39){
+            game.playMove(AI.findBestMove(game.board, 5));
+            repaint();
+        }
         else if(e.getKeyCode() == 40){
             if(game.chosenPromotion == 0){
                 game.chosenPromotion = 3;

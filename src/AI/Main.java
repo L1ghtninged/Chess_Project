@@ -8,18 +8,13 @@ public class Main {
     public static void main(String[] args) {
 
 
-        ChessGame game = new ChessGame("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+        ChessGame game = new ChessGame(Board.startPosition);
 
-        // Set up the board with the given moves
-        game.playMove(new Move("e2", "e4"));
-        game.playMove(new Move("e7", "e5"));
-        game.playMove(new Move("g1", "f3"));
-        game.playMove(new Move("d8", "h4"));
 
-        // Find and print the best move at depth 2
-        int depth = 5;
-        Move bestMove = AI.findBestMove(game.board, depth);
-        System.out.println("Best move at depth " + depth + ": " + bestMove);
+        GameFrame frame = new GameFrame(game);
+        //int depth = 4;
+        //Move bestMove = AI.findBestMove(game.board, depth);
+        //System.out.println("Best move at depth " + depth + ": " + bestMove);
 
 
     }

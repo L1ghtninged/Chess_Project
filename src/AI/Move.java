@@ -2,7 +2,7 @@ package AI;
 
 import java.util.Objects;
 
-public class Move {
+public class Move{
     private int pieceIndex;
     private int positionIndex;
     private int promotion = 0;
@@ -103,4 +103,6 @@ public class Move {
     public int hashCode() {
         return Objects.hash(pieceIndex, positionIndex, promotion, castling, isEnPassant);
     }
+
+
 }

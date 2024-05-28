@@ -41,6 +41,11 @@ public class ChessGame {
 
 
     }
+    public void loadFromFen(String fen){
+        this.boards.clear();
+        this.board = new Board(fen);
+        boards.add(board);
+    }
 
 
 }

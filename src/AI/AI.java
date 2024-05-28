@@ -2,43 +2,37 @@ package AI;
 import java.util.ArrayList;
 
 public class AI {
-    public static final int pawnValue = 100;
-    public static final int knightValue = 300;
-    public static final int bishopValue = 300;
-    public static final int rookValue = 500;
-    public static final int queenValue = 900;
-
+    public static final MoveOrdering ordering = new MoveOrdering();
+    public static int positions = 0;
     public static int evaluate(Board board) {
         int perspective = board.isWhiteToMove ? 1 : -1;
-        int materialScore = countMaterial(board.board);
-        return materialScore * perspective;
+        int eval = countValue(board.board);
+        return eval * perspective;
     }
 
     public static int search(int depth, int alpha, int beta, Board board) {
         if (depth == 0) {
+            positions++;
             return evaluate(board);
         }
 
         ArrayList<Move> moves = MoveGenerator.generateLegalMoves(board.isWhiteToMove, board);
+        ordering.sortMoves(moves, board);
         if (moves.size() == 0) {
             boolean isWhiteToMove = board.isWhiteToMove;
             boolean isInCheck = MoveGenerator.isSquareAttacked(board, MoveGenerator.findKingPosition(board.board, isWhiteToMove ? Piece.white : Piece.black), !isWhiteToMove);
             if (isInCheck) {
-                return Integer.MIN_VALUE + 1;
+                return Integer.MIN_VALUE+1;
             }
             return 0;
         }
-
-        System.out.println("Depth: " + depth + ", Alpha: " + alpha + ", Beta: " + beta + ", Number of moves: " + moves.size());
 
         for (Move move : moves) {
             Board tmp = new Board(board);
             tmp.makeMove(move);
             int evaluation = -search(depth - 1, -beta, -alpha, tmp);
-            System.out.println("Evaluating move: " + move + ", Evaluation: " + evaluation);
 
             if (evaluation >= beta) {
-                System.out.println("Beta cutoff for move: " + move + ", Evaluation: " + evaluation);
                 return beta;
             }
             alpha = Math.max(alpha, evaluation);
@@ -53,14 +47,11 @@ public class AI {
         int beta = Integer.MAX_VALUE;
 
         ArrayList<Move> moves = MoveGenerator.generateLegalMoves(board.isWhiteToMove, board);
-        System.out.println("Finding best move at depth: " + depth);
-        System.out.println("Initial alpha: " + alpha + ", Initial beta: " + beta);
 
         for (Move move : moves) {
             Board tmp = new Board(board);
             tmp.makeMove(move);
             int evaluation = -search(depth - 1, Integer.MIN_VALUE + 1, Integer.MAX_VALUE - 1, tmp);
-            System.out.println("Move: " + move + ", Evaluation: " + evaluation);
 
             if (evaluation > bestEvaluation) {
                 bestEvaluation = evaluation;
@@ -68,26 +59,27 @@ public class AI {
             }
             alpha = Math.max(alpha, evaluation);
         }
-
-        System.out.println("Best move found: " + bestMove + ", evaluation: " + bestEvaluation);
+        System.out.println(positions);
+        positions = 0;
         return bestMove;
     }
 
-    public static int countMaterial(int[] board) {
+    public static int countValue(int[] board) {
+        int count = 0;
+        for (int i = 0; i < board.length; i++) {
+            int piece = board[i];
+            int sign = Piece.getColor(piece) ? 1 : -1;
+            count += ((Offsets.getPieceValue(piece) + Offsets.getPositionValue(piece, i))) * sign;
+        }
+        return count;
+    }
+    public static int countMaterial(int[] board){
         int material = 0;
-        for (int i : board) {
-            int piece = i & 0b111;
-            int sign = Piece.getColor(i) ? 1 : -1;
-            switch (piece) {
-                case Piece.pawn -> material += (pawnValue * sign);
-                case Piece.knight -> material += (knightValue * sign);
-                case Piece.bishop -> material += (bishopValue * sign);
-                case Piece.rook -> material += (rookValue * sign);
-                case Piece.queen -> material += (queenValue * sign);
-                default -> {
-                }
-            }
+        for(int piece : board){
+            int sign = Piece.getColor(piece) ? 1 : -1;
+            material += Offsets.getPieceValue(piece) * sign;
         }
         return material;
     }
+
 }

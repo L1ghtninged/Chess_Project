@@ -14,7 +14,8 @@ public class Board implements Cloneable{
     public boolean blackCastlingKing = true;
     public boolean blackCastlingQueen = true;
     public HashMap<Integer, Character> pieceMap = new HashMap<>();
-
+    public ArrayList<Integer>[] whiteAttackMap = new ArrayList[64];
+    public ArrayList<Integer>[] blackAttackMap = new ArrayList[64];
 
 
     @Override
@@ -24,7 +25,32 @@ public class Board implements Cloneable{
         Board board1 = (Board) o;
         return enPassantTarget == board1.enPassantTarget && isWhiteToMove == board1.isWhiteToMove && whiteCastlingQueen == board1.whiteCastlingQueen && whiteCastlingKing == board1.whiteCastlingKing && blackCastlingKing == board1.blackCastlingKing && blackCastlingQueen == board1.blackCastlingQueen && Arrays.equals(board, board1.board) && pieceMap.equals(board1.pieceMap);
     }
+    public void updateWhiteAttackMap(Move move){
+        int pieceIndex = move.getPieceIndex();
+        int positionIndex = move.getPositionIndex();
 
+    }
+    public void updateBlackAttackMap(Move move){
+
+    }
+    public void setUpWhiteAttackMap(){
+        ArrayList<Move> pseudoMoves = MoveGenerator.generatePseudoLegalMoves(this, true);
+
+        for(Move move: pseudoMoves){
+            int attackedIndex = move.getPositionIndex();
+            int attackerIndex = move.getPieceIndex();
+            whiteAttackMap[attackedIndex].add(attackerIndex);
+        }
+    }
+    public void setUpBlackAttackMap(){
+        ArrayList<Move> pseudoMoves = MoveGenerator.generatePseudoLegalMoves(this, false);
+
+        for(Move move: pseudoMoves){
+            int attackedIndex = move.getPositionIndex();
+            int attackerIndex = move.getPieceIndex();
+            blackAttackMap[attackedIndex].add(attackerIndex);
+        }
+    }
     @Override
     public int hashCode() {
         int result = Objects.hash(enPassantTarget, isWhiteToMove, whiteCastlingQueen, whiteCastlingKing, blackCastlingKing, blackCastlingQueen, pieceMap);
