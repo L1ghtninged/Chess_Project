@@ -294,13 +294,16 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        //debugging
         /*if(e.getKeyCode() == 37){
             if(game.boards.size()>1){
                 game.undoMove();
                 repaint();
             }
         }
+
          */
+
         if(e.getKeyCode() == 38){
             if(game.chosenPromotion == 3){
                 game.chosenPromotion = 0;

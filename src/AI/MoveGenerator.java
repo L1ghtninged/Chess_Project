@@ -162,6 +162,7 @@ public class MoveGenerator {
                     legalMoves.add(new Move(1));
                 }
             }
+
             if(chessboard.whiteCastlingQueen){
                 if(checkWhiteCastlingQueen(chessboard)){
                     legalMoves.add(new Move(2));
@@ -210,10 +211,12 @@ public class MoveGenerator {
      * @return boolean, true if castling is legal
      */
     public static boolean checkWhiteCastlingQueen( Board board){
+
         if(isSquareAttacked(board, 4, false)|isSquareAttacked(board, 3, false)|isSquareAttacked(board, 2, false)){
             return false;
         }
         if(board.board[3]!=0|board.board[2]!=0|board.board[1]!=0){
+
             return false;
         }
         if(board.board[0] != (Piece.rook | Piece.white)){

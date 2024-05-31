@@ -11,23 +11,10 @@ public class Main {
     public static void main(String[] args) {
 
 
-        ChessGame game = new ChessGame("8/8/8/4K3/8/8/bbk4p/8");
-        game.loadFromFen(Board.startPosition);
+        ChessGame game = new ChessGame(Board.startPosition);
+        new GameFrame(game);
 
 
-        /*game.board.whiteCastlingKing = false;
-        game.board.whiteCastlingQueen = false;
-        game.board.blackCastlingQueen = false;
-        game.board.blackCastlingKing = false;
-
-
-         */
-
-
-        GameFrame frame = new GameFrame(game);
-        //int depth = 4;
-        //Move bestMove = AI.findBestMove(game.board, depth);
-        //System.out.println("Best move at depth " + depth + ": " + bestMove);
 
 
     }

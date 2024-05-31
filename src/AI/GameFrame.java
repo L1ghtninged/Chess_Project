@@ -24,6 +24,7 @@ public class GameFrame extends JFrame{
         this.setSize(614, 735);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setTitle("Chess");
 
     }
 

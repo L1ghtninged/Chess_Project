@@ -128,18 +128,19 @@ public class Board implements Cloneable{
      */
     public void makeMove(Move move){
         //AI.Board helpBoard = new AI.Board(this.board, this.enPassantTarget, this.isWhiteToMove, this.whiteCastlingQueen, this.whiteCastlingKing, this.blackCastlingKing, this.blackCastlingQueen, this.pieceMap);
-
         if(move.getPieceIndex()==4){
             whiteCastlingQueen = false;
             whiteCastlingKing = false;
         }
+
         else if(move.getPieceIndex() == 7){
             whiteCastlingKing = false;
         }
-        else if(move.getPieceIndex() == 0){
+        else if(move.getPieceIndex() == 0 && move.getCastling() == 0){
             whiteCastlingQueen = false;
         }
-        else if(move.getPositionIndex() == 0){
+
+        else if(move.getPositionIndex() == 0 && move.getCastling() == 0){
             whiteCastlingQueen = false;
         }
         else if(move.getPositionIndex() == 7){
@@ -204,7 +205,7 @@ public class Board implements Cloneable{
                 enPassantTarget = Main.getIndex(startX, (startY + endY) / 2);
             }
         }
-        isWhiteToMove = !isWhiteToMove;;
+        isWhiteToMove = !isWhiteToMove;
         //return helpBoard;
     }
 
