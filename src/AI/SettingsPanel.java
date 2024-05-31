@@ -2,9 +2,12 @@ package AI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SettingsPanel extends JPanel {
+public class SettingsPanel extends JPanel implements ActionListener {
     ChessGame game;
+    GamePanel board;
     public static final int PANEL_WIDTH = 600;
     public static final int PANEL_HEIGHT = 100;
     Image whitePawn;
@@ -19,8 +22,11 @@ public class SettingsPanel extends JPanel {
     Image blackRook;
     Image blackQueen;
     Image blackKing;
+    JButton newGameAI;
+    JButton newGame;
 
-    public SettingsPanel(ChessGame game){
+    public SettingsPanel(ChessGame game, GamePanel board){
+        this.board = board;
         this.game = game;
         this.setFocusable(true);
         this.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
@@ -36,7 +42,27 @@ public class SettingsPanel extends JPanel {
         blackRook = new ImageIcon("blackRook.png").getImage();
         blackKing = new ImageIcon("blackKing.png").getImage();
         blackQueen = new ImageIcon("blackQueen.png").getImage();
+
+        newGameAI = new JButton();
+        newGameAI.setFocusable(false);
+        newGameAI.setBounds(120, 0, 200, 85);
+        newGameAI.setVisible(true);
+        newGameAI.setText("NEW GAME AGAINST AI");
+        newGameAI.addActionListener(this);
+
+        newGame = new JButton();
+        newGame.setFocusable(false);
+        newGame.setBounds(320, 0, 200, 85);
+        newGame.setVisible(true);
+        newGame.setText("NEW GAME");
+        newGame.addActionListener(this);
+
+        this.add(newGameAI);
+        this.add(newGame);
+        this.setLayout(null);
     }
+
+
     public void updatePromotionImage(){
         repaint();
     }
@@ -58,5 +84,22 @@ public class SettingsPanel extends JPanel {
             case Piece.queen | Piece.black -> g.drawImage(blackQueen, 0, 0, null);
             case Piece.pawn | Piece.black -> g.drawImage(blackPawn, 0, 0, null);
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource() == newGameAI){
+            game = new ChessGame(Board.startPosition, true);
+            board.game = game;
+            board.repaint();
+        }
+        else if(e.getSource() == newGame){
+            game = new ChessGame(Board.startPosition, false);
+            board.game = game;
+
+            board.repaint();
+        }
+        updatePromotionImage();
     }
 }

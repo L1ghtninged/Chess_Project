@@ -4,11 +4,24 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Main class
+ */
 public class Main {
     public static void main(String[] args) {
 
 
-        ChessGame game = new ChessGame(Board.startPosition);
+        ChessGame game = new ChessGame("8/8/8/4K3/8/8/bbk4p/8");
+        game.loadFromFen(Board.startPosition);
+
+
+        /*game.board.whiteCastlingKing = false;
+        game.board.whiteCastlingQueen = false;
+        game.board.blackCastlingQueen = false;
+        game.board.blackCastlingKing = false;
+
+
+         */
 
 
         GameFrame frame = new GameFrame(game);
@@ -19,10 +32,12 @@ public class Main {
 
     }
 
-    public static void playMove(Move move, Board board){
-        board.playMove(move);
-        System.out.println(board);
-    }
+    /**
+     * Helps for debugging move-generation
+     * @param depth - corresponds to 1 player making a move
+     * @param board
+     * @return number of possible positions
+     */
     public static int moveGenerationTest(int depth, Board board) {
         if (depth == 0) {
 
@@ -41,13 +56,27 @@ public class Main {
         return numPositions;
     }
 
-
+    /**
+     * @param square - index of a piece
+     * @return the rank of the piece, based on the index
+     */
     public static int getRank(int square){
         return square/8;
     }
+    /**
+     * @param square - index of a piece
+     * @return the file of the piece, based on the index
+     */
     public static int getFile(int square){
         return square - 8*Main.getRank(square);
     }
+
+    /**
+     *
+     * @param file - file of the piece
+     * @param rank - rank of the piece
+     * @return index of a piece, based on its file and rank
+     */
     public static int getIndex(int file, int rank){
         if(rank < 0 || file < 0){
             return -1;
@@ -57,9 +86,14 @@ public class Main {
         }
         return file+rank*8;
     }
+
+    /**
+     *
+     * @param index of a square on a chessboard
+     * @return name of the square, based on the classical chess notation
+     */
     public static String getSquare(int index){
         HashMap<Integer, Character> fileMap = new HashMap<>();
-        fileMap = new HashMap<>();
         fileMap.put(0, 'a');
         fileMap.put(1, 'b');
         fileMap.put(2, 'c');
@@ -75,9 +109,14 @@ public class Main {
 
 
     }
+
+    /**
+     *
+     * @param square - name of a square on a chessboard, based on the classical chess notation
+     * @return index of the square based on its name
+     */
     public static int getIndex(String square){
         HashMap<Character, Integer> fileMap = new HashMap<>();
-        fileMap = new HashMap<>();
         fileMap.put('a', 0);
         fileMap.put('b', 1);
         fileMap.put('c', 2);
@@ -92,6 +131,12 @@ public class Main {
         return getIndex(file, rank);
 
     }
+
+    /**
+     * loads a chessboard
+     * @param fen - string, describes a chess position
+     * @return board
+     */
     public static int[] loadFromFEN(String fen){
         int[] board = new int[64];
         char[]pos = fen.toCharArray();

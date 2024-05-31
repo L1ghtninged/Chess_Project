@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Board class, handles all the piece positions.
+ */
 public class Board implements Cloneable{
     public int[] board;
     public int enPassantTarget = -1;
@@ -14,9 +17,6 @@ public class Board implements Cloneable{
     public boolean blackCastlingKing = true;
     public boolean blackCastlingQueen = true;
     public HashMap<Integer, Character> pieceMap = new HashMap<>();
-    public ArrayList<Integer>[] whiteAttackMap = new ArrayList[64];
-    public ArrayList<Integer>[] blackAttackMap = new ArrayList[64];
-
 
     @Override
     public boolean equals(Object o) {
@@ -25,32 +25,6 @@ public class Board implements Cloneable{
         Board board1 = (Board) o;
         return enPassantTarget == board1.enPassantTarget && isWhiteToMove == board1.isWhiteToMove && whiteCastlingQueen == board1.whiteCastlingQueen && whiteCastlingKing == board1.whiteCastlingKing && blackCastlingKing == board1.blackCastlingKing && blackCastlingQueen == board1.blackCastlingQueen && Arrays.equals(board, board1.board) && pieceMap.equals(board1.pieceMap);
     }
-    public void updateWhiteAttackMap(Move move){
-        int pieceIndex = move.getPieceIndex();
-        int positionIndex = move.getPositionIndex();
-
-    }
-    public void updateBlackAttackMap(Move move){
-
-    }
-    public void setUpWhiteAttackMap(){
-        ArrayList<Move> pseudoMoves = MoveGenerator.generatePseudoLegalMoves(this, true);
-
-        for(Move move: pseudoMoves){
-            int attackedIndex = move.getPositionIndex();
-            int attackerIndex = move.getPieceIndex();
-            whiteAttackMap[attackedIndex].add(attackerIndex);
-        }
-    }
-    public void setUpBlackAttackMap(){
-        ArrayList<Move> pseudoMoves = MoveGenerator.generatePseudoLegalMoves(this, false);
-
-        for(Move move: pseudoMoves){
-            int attackedIndex = move.getPositionIndex();
-            int attackerIndex = move.getPieceIndex();
-            blackAttackMap[attackedIndex].add(attackerIndex);
-        }
-    }
     @Override
     public int hashCode() {
         int result = Objects.hash(enPassantTarget, isWhiteToMove, whiteCastlingQueen, whiteCastlingKing, blackCastlingKing, blackCastlingQueen, pieceMap);
@@ -58,7 +32,7 @@ public class Board implements Cloneable{
         return result;
     }
 
-    public static final String startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    public static final String startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"; // Start fen position
     public Board(String fen){
         this.board = Main.loadFromFEN(fen);
         initializeMap();
@@ -72,6 +46,10 @@ public class Board implements Cloneable{
         initializeMap();
     }
 
+    /**
+     * Makes a copy of another board, not changing reference
+     * @param other
+     */
     public Board(Board other) {
             this.board = other.board.clone();
             this.enPassantTarget = other.enPassantTarget;
@@ -83,6 +61,10 @@ public class Board implements Cloneable{
             this.pieceMap = new HashMap<>(other.pieceMap);
     }
 
+    /**
+     * Plays a move on the board
+     * @param move - if legal, it gets played
+     */
     public void playMove(Move move){
         ArrayList<Move> legalMoves = MoveGenerator.generateLegalMoves(isWhiteToMove, this);
 
@@ -93,6 +75,10 @@ public class Board implements Cloneable{
             throw new IllegalArgumentException("Illegal move");
         }
     }
+
+    /**
+     * Plays the move "castles" kingside for the white king
+     */
     public void whiteCastlingKing(){
         board[6] = Piece.king| Piece.white;
         board[4] = Piece.none;
@@ -101,6 +87,9 @@ public class Board implements Cloneable{
         whiteCastlingKing = false;
         whiteCastlingQueen = false;
     }
+    /**
+     * Plays the move "castles" queenside for the white king
+     */
     public void whiteCastlingQueen(){
         board[4] = Piece.none;
         board[0] = Piece.none;
@@ -110,6 +99,9 @@ public class Board implements Cloneable{
         whiteCastlingQueen = false;
 
     }
+    /**
+     * Plays the move "castles" kingside for the black king
+     */
     public void blackCastlingKing(){
         board[62] = Piece.king| Piece.black;
         board[60] = Piece.none;
@@ -118,6 +110,9 @@ public class Board implements Cloneable{
         blackCastlingKing = false;
         blackCastlingQueen = false;
     }
+    /**
+     * Plays the move "castles" queenside for the black king
+     */
     public void blackCastlingQueen(){
         board[60] = Piece.none;
         board[56] = Piece.none;
@@ -127,6 +122,10 @@ public class Board implements Cloneable{
         blackCastlingQueen = false;
     }
 
+    /**
+     * Makes a move
+     * @param move - gets played on the board
+     */
     public void makeMove(Move move){
         //AI.Board helpBoard = new AI.Board(this.board, this.enPassantTarget, this.isWhiteToMove, this.whiteCastlingQueen, this.whiteCastlingKing, this.blackCastlingKing, this.blackCastlingQueen, this.pieceMap);
 
@@ -209,14 +208,6 @@ public class Board implements Cloneable{
         //return helpBoard;
     }
 
-    public void setPiece(int x, int y, int piece){
-        int index = Main.getIndex(x, y);
-        board[index] = piece;
-    }
-
-
-
-
     public String toString(){
         StringBuilder string = new StringBuilder();
         for(int i = 7; i >= 0;i--){
@@ -231,6 +222,9 @@ public class Board implements Cloneable{
 
     }
 
+    /**
+     * Initializes a hashmap for pieces and their characters
+     */
     private void initializeMap(){
         pieceMap.put(Piece.none, '*');
         pieceMap.put(Piece.white| Piece.king, 'K');

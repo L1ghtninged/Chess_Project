@@ -5,12 +5,14 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 
 public class GameFrame extends JFrame{
-
+    SettingsPanel panel;
+    GamePanel board;
 
 
     public GameFrame(ChessGame game){
-        SettingsPanel panel = new SettingsPanel(game);
-        GamePanel board = new GamePanel(game, panel);
+        board = new GamePanel(game, panel);
+        panel = new SettingsPanel(game, board);
+        board.settingsPanel = panel;
 
         this.add(panel);
         this.add(board);

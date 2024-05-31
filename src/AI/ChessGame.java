@@ -2,8 +2,11 @@ package AI;
 
 import java.util.ArrayList;
 
+/**
+ * Chess-game class, remembers all positions that occurred
+ */
 public class ChessGame {
-
+    public boolean aiPlaying = false;
     public ArrayList<Board> boards = new ArrayList<>();
     public Board board;
     public int[] promotionSet;
@@ -18,6 +21,15 @@ public class ChessGame {
         setUpPromotion();
         boards.add(board);
     }
+    public ChessGame(String fen, boolean aiPlaying){
+        this.aiPlaying = aiPlaying;
+        this.board = new Board(fen);
+        setUpPromotion();
+        boards.add(board);
+    }
+    /**
+     * Sets an array with promotion pieces
+     */
     public void setUpPromotion(){
         promotionSet = new int[4];
         promotionSet[0] = Piece.queen;
@@ -26,14 +38,19 @@ public class ChessGame {
         promotionSet[3] = Piece.knight;
         chosenPromotion = 0;
     }
+
+    /**
+     * Undoes the last move that has been played
+     */
     public void undoMove(){
         boards.remove(boards.size()-1);
         board = boards.get(boards.size()-1);
     }
-    public void redoMove(){
-        board = boards.get(boards.indexOf(board)+1);
-    }
 
+    /**
+     * Clones the current board and plays the move
+     * @param move - gets played
+     */
     public void playMove(Move move){
         Board b = board.clone();
         board.playMove(move);
@@ -41,10 +58,25 @@ public class ChessGame {
 
 
     }
+
+    /**
+     * Loads a position from a string
+     * @param fen - string, describes a chess position
+     */
     public void loadFromFen(String fen){
         this.boards.clear();
         this.board = new Board(fen);
         boards.add(board);
+    }
+
+    public void playMoveAI(int depth){
+
+        Move move = AI.findBestMove(this, depth);
+        if(move != null){
+            playMove(move);
+
+        }
+
     }
 
 

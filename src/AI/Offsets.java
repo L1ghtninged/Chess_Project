@@ -48,9 +48,19 @@ public class Offsets {
             {50, 50, 50, 50, 50, 50, 50, 50},
             {10, 10, 20, 30, 30, 20, 10, 10},
             {5, 5, 10, 25, 25, 10, 5, 5},
-            {0, 0, 0, 20, 20, 0, 0, 0},
+            {0, 0, 0, 30, 30, 0, 0, 0},
             {5, -5, -20, 0, 0, -20, -5, 5},
             {5, 10, 10, -20, -20, 10, 10, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0}
+    };
+    public static final int[][] PAWN_VALUES_ENDGAME = {
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {50, 50, 50, 50, 50, 50, 50, 50},
+            {40, 40, 40, 40, 40, 40, 40, 40},
+            {30, 30, 30, 30, 30, 30, 30, 30},
+            {20, 20, 20, 20, 20, 20, 20, 20},
+            {10, 10, 10, 10, 10, 10, 10, 10},
+            {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0}
     };
     public static final int[][] BISHOP_VALUES = {
@@ -71,7 +81,7 @@ public class Offsets {
             {-5, 0, 0, 0, 0, 0, 0, -5},
             {-5, 0, 0, 0, 0, 0, 0, -5},
             {-5, 0, 0, 0, 0, 0, 0, -5},
-            {0, 0, 0, 5, 5, 0, 0, 0}
+            {0, 0, 10, 20, 20, 10, 0, 0}
     };
     public static final int[][] QUEEN_VALUES = {
             {-20, -10, -10, -5, -5, -10, -10, -20},
@@ -91,7 +101,7 @@ public class Offsets {
             {-20, -30, -30, -40, -40, -30, -30, -20},
             {-10, -20, -20, -20, -20, -20, -20, -10},
             {20, 20, 0, 0, 0, 0, 20, 20},
-            {20, 30, 10, 0, 0, 10, 30, 20}
+            {20, 50, 10, 0, 0, 10, 50, 20}
     };
     public static final int[][] KING_VALUES_ENDGAME = {
             {-50, -40, -30, -20, -20, -30, -40, -50},
@@ -118,20 +128,37 @@ public class Offsets {
     }
     public static int getPositionValue(int piece, int pieceIndex){
         int p = piece & 0b111;
-        int sign = Piece.getColor(piece) ? 1 : -1;
         int rank = Main.getRank(pieceIndex);
         int file = Main.getFile(pieceIndex);
+        if(!Piece.getColor(piece)){
+            rank = 7 - rank;
+        }
         return switch(p){
-            case Piece.pawn -> PAWN_VALUES[rank][file] * sign;
-            case Piece.knight -> KNIGHT_VALUES[rank][file] * sign;
-            case Piece.bishop -> BISHOP_VALUES[rank][file] * sign;
-            case Piece.rook -> ROOK_VALUES[rank][file] * sign;
-            case Piece.queen -> QUEEN_VALUES[rank][file] * sign;
-            case Piece.king -> KING_VALUES[rank][file] * sign;
+            case Piece.pawn -> PAWN_VALUES[rank][file];
+            case Piece.knight -> KNIGHT_VALUES[rank][file];
+            case Piece.bishop -> BISHOP_VALUES[rank][file];
+            case Piece.rook -> ROOK_VALUES[rank][file];
+            case Piece.queen -> QUEEN_VALUES[rank][file];
+            case Piece.king -> KING_VALUES[rank][file] ;
             default -> 0;
         };
 
 
+    }
+    public static int getEndgamePositionValue(int piece, int pieceIndex){
+        int p = piece & 0b111;
+        int sign = Piece.getColor(piece) ? 1 : -1;
+        int rank = Main.getRank(pieceIndex);
+        int file = Main.getFile(pieceIndex);
+        return switch(p){
+            case Piece.pawn -> PAWN_VALUES_ENDGAME[rank][file] * sign;
+            case Piece.knight -> 0;
+            case Piece.bishop -> 0;
+            case Piece.rook -> 0;
+            case Piece.queen -> 0;
+            case Piece.king -> KING_VALUES_ENDGAME[rank][file] * sign;
+            default -> 0;
+        };
     }
 
 }

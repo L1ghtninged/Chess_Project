@@ -3,6 +3,7 @@ package AI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements MouseListener, KeyListener {
     ChessGame game;
@@ -22,7 +23,7 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
     Image blackRook;
     Image blackQueen;
     Image blackKing;
-
+    public boolean ai = false;
     int targetSquare = -1;
 
     public GamePanel(ChessGame game, SettingsPanel settings) {
@@ -48,7 +49,30 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         blackKing = new ImageIcon("blackKing.png").getImage();
         blackQueen = new ImageIcon("blackQueen.png").getImage();
     }
+    public GamePanel(ChessGame game, SettingsPanel settings, boolean ai) {
+        this.ai = ai;
+        this.game = game;
+        this.settingsPanel = settings;
+        this.setFocusable(true);
+        this.addMouseListener(this);
+        this.addKeyListener(this);
+        this.setFocusTraversalKeysEnabled(false);
+        this.setBounds(0, SettingsPanel.PANEL_HEIGHT, GAME_WIDTH, GAME_HEIGHT);
 
+        // Load images
+        whitePawn = new ImageIcon("whitePawn.png").getImage();
+        whiteKnight = new ImageIcon("whiteKnight.png").getImage();
+        whiteBishop = new ImageIcon("whiteBishop.png").getImage();
+        whiteRook = new ImageIcon("whiteRook.png").getImage();
+        whiteKing = new ImageIcon("whiteKing.png").getImage();
+        whiteQueen = new ImageIcon("whiteQueen.png").getImage();
+        blackPawn = new ImageIcon("blackPawn.png").getImage();
+        blackKnight = new ImageIcon("blackKnight.png").getImage();
+        blackBishop = new ImageIcon("blackBishop.png").getImage();
+        blackRook = new ImageIcon("blackRook.png").getImage();
+        blackKing = new ImageIcon("blackKing.png").getImage();
+        blackQueen = new ImageIcon("blackQueen.png").getImage();
+    }
     @Override
     public void addNotify() {
         super.addNotify();
@@ -98,43 +122,31 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
     }
 
     public void movePiece(int startIndex, int endIndex) {
-        try {
-            game.playMove(new Move(startIndex, endIndex));
-        } catch (IllegalArgumentException e) {
-            try {
-                game.playMove(new Move(startIndex, endIndex, true));
-            } catch (IllegalArgumentException exception) {
-                // Handle exceptions if needed
-            }
-            if ((game.board.board[startIndex] & 0b00111) == Piece.king && (endIndex == startIndex + 2)) {
-                try {
-                    game.playMove(new Move(1));
-                } catch (IllegalArgumentException exception) {
-                    // Handle exceptions if needed
-                }
-            } else if ((game.board.board[startIndex] & 0b00111) == Piece.king && (endIndex == startIndex - 2)) {
-                try {
-                    game.playMove(new Move(2));
-                } catch (IllegalArgumentException exception) {
-                    // Handle exceptions if needed
-                }
-            } else if (Main.getRank(endIndex) == 7 && game.board.board[startIndex] == (Piece.pawn | Piece.white)) {
-                try {
-                    game.playMove(new Move(startIndex, endIndex, game.promotionSet[game.chosenPromotion] | Piece.white));
-                } catch (IllegalArgumentException exception) {
-                    // Handle exceptions if needed
-                }
-            } else if (Main.getRank(endIndex) == 0 && game.board.board[startIndex] == (Piece.pawn | Piece.black)) {
-                try {
-                    game.playMove(new Move(startIndex, endIndex, game.promotionSet[game.chosenPromotion] | Piece.black));
-                } catch (IllegalArgumentException exception) {
-                    // Handle exceptions if needed
-                }
-            }
+        Move move = new Move(startIndex, endIndex);
+        Move m = isMoveLegal(move);
+        if(m != null){
+            game.playMove(m);
+        }
+        else{
+            targetSquare = -1;
+            return;
         }
         targetSquare = -1;
-        repaint();
+        if(game.aiPlaying){
+            game.playMoveAI(4);
+        }
+
+
+        if(MoveGenerator.generateLegalMoves(game.board.isWhiteToMove, game.board).size() == 0){
+            if(game.board.isWhiteToMove){
+                System.out.println("Black won");
+            }
+            else{
+                System.out.println("White won");
+            }
+        }
         settingsPanel.updatePromotionImage();
+        repaint();
     }
 
     public void selectedSquare(int x, int y) {
@@ -148,6 +160,52 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
             movePiece(targetSquare, Main.getIndex(x, y));
         }
         repaint();
+    }
+    private Move isMoveLegal(Move move){
+        ArrayList<Move> moves = MoveGenerator.generateLegalMoves(game.board.isWhiteToMove, game.board);
+        if(moves.contains(move)){
+            return move;
+        }
+
+        Move enPassantMove = new Move(move.getPieceIndex(), move.getPositionIndex(), true);
+        if(moves.contains(enPassantMove)){
+            return new Move(move.getPieceIndex(), move.getPositionIndex(), true);
+        }
+        int piece = game.board.board[move.getPieceIndex()];
+        if(piece == (Piece.white | Piece.king)){
+            if(move.getPositionIndex() == move.getPieceIndex() + 2){
+                if(moves.contains(new Move(1))){
+                    return new Move(1);
+                }
+            }
+            if(move.getPositionIndex() == move.getPieceIndex() - 2){
+                if(moves.contains(new Move(2))){
+                    return new Move(2);
+                }
+            }
+        }
+        if(piece == (Piece.black | Piece.king)){
+            if(move.getPositionIndex() == move.getPieceIndex() + 2){
+                if(moves.contains(new Move(1))){
+
+                    return new Move(1);
+                }
+            }
+            if(move.getPositionIndex() == move.getPieceIndex() - 2){
+                if(moves.contains(new Move(2))){
+                    return new Move(2);
+                }
+            }
+        }
+
+        int promotion = game.promotionSet[game.chosenPromotion];
+        if(moves.contains(new Move(move.getPieceIndex(), move.getPositionIndex(), promotion | Piece.white))){
+            return new Move(move.getPieceIndex(), move.getPositionIndex(), promotion | Piece.white);
+        }
+        if(moves.contains(new Move(move.getPieceIndex(), move.getPositionIndex(), promotion | Piece.black))){
+            return new Move(move.getPieceIndex(), move.getPositionIndex(), promotion | Piece.black);
+        }
+        return null;
     }
 
     @Override
@@ -184,12 +242,14 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == 37){
+        /*if(e.getKeyCode() == 37){
             if(game.boards.size()>1){
                 game.undoMove();
                 repaint();
             }
         }
+
+         */
         if(e.getKeyCode() == 38){
             if(game.chosenPromotion == 3){
                 game.chosenPromotion = 0;
@@ -197,10 +257,6 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
             else{
                 game.chosenPromotion++;
             }
-        }
-        if(e.getKeyCode() == 39){
-            game.playMove(AI.findBestMove(game.board, 5));
-            repaint();
         }
         else if(e.getKeyCode() == 40){
             if(game.chosenPromotion == 0){
@@ -210,6 +266,7 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
                 game.chosenPromotion--;
             }
         }
+        System.out.println(game.chosenPromotion);
         settingsPanel.updatePromotionImage();
     }
 

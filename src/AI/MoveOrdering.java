@@ -2,6 +2,10 @@ package AI;
 
 import java.util.ArrayList;
 
+/**
+ * Helps the AI order its moves, so that it can focus on the more relevant first. It prefers captures,
+ * before any other move.
+ */
 public class MoveOrdering {
     public void sortMoves(ArrayList<Move> moves, Board board){
         ArrayList<Move> captures = new ArrayList<>();
@@ -23,27 +27,25 @@ public class MoveOrdering {
         moves.addAll(others);
     }
 
+    /**
+     * Determines whether a piece of higher value can be captured by a piece of lower value
+     * @param move - is being examined
+     * @param board - chessboard
+     * @return a factor of how much the attacking piece is lower than the victim
+     */
     public int getMVVLVA(Move move, Board board){
         int victimValue = Offsets.getPieceValue(board.board[move.getPositionIndex()]);
         int attackerValue = Offsets.getPieceValue(board.board[move.getPieceIndex()]);
 
         return victimValue * 10 - attackerValue;
     }
-    public boolean isCheck(Move move, Board board){
-        Board tmp = new Board(board);
-        tmp.playMove(move);
-        tmp.setUpBlackAttackMap();
-        tmp.setUpWhiteAttackMap();
-        return isKingAttacked(tmp, tmp.isWhiteToMove);
-    }
-    public boolean isKingAttacked(Board board, boolean color){
-        int index = findKing(board, color);
-        if(color){
-            return board.blackAttackMap[index].size() != 0;
-        }
-        return board.whiteAttackMap[index].size() != 0;
 
-    }
+    /**
+     *
+     * @param move - chess move
+     * @param board - chessboard
+     * @return if a move is a capture
+     */
     private boolean isCapture(Move move, Board board){
         return board.board[move.getPositionIndex()] != 0;
     }
