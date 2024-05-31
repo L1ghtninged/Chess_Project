@@ -136,7 +136,7 @@ public class AI {
                 evaluation = -search(depth - 1, Integer.MIN_VALUE + 1, Integer.MAX_VALUE - 1, tmp);
                 if(move.getCastling() > 0){
                     evaluation += 50;
-                }System.out.println(move + " eval: "+evaluation);
+                }
             }
 
             if (evaluation > bestEvaluation) {
@@ -145,7 +145,6 @@ public class AI {
             }
             alpha = Math.max(alpha, evaluation);
         }
-        System.out.println("Best move: "+bestMove+" eval: "+bestEvaluation);
         return bestMove;
     }
 
