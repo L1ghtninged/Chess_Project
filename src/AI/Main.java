@@ -34,7 +34,7 @@ public class Main {
 
     /**
      * Helps for debugging move-generation
-     * Creates mistakes with castling, however when going a lower depth of the position, it won't do those mistakes
+     * Creates mistakes with castling, however when going to a lower depth of the position, it won't do those mistakes
      * @param depth - corresponds to 1 player making a move
      * @param board
      * @return number of possible positions
