@@ -1,5 +1,3 @@
-package AI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -320,7 +318,6 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
                 game.chosenPromotion--;
             }
         }
-        System.out.println(game.chosenPromotion);
         settingsPanel.updatePromotionImage();
     }
 

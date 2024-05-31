@@ -1,6 +1,3 @@
-package AI;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +10,6 @@ public class Main {
 
         ChessGame game = new ChessGame(Board.startPosition);
         new GameFrame(game);
-
 
 
 

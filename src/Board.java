@@ -1,5 +1,3 @@
-package AI;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -127,7 +125,7 @@ public class Board implements Cloneable{
      * @param move - gets played on the board
      */
     public void makeMove(Move move){
-        //AI.Board helpBoard = new AI.Board(this.board, this.enPassantTarget, this.isWhiteToMove, this.whiteCastlingQueen, this.whiteCastlingKing, this.blackCastlingKing, this.blackCastlingQueen, this.pieceMap);
+        //Board helpBoard = new Board(this.board, this.enPassantTarget, this.isWhiteToMove, this.whiteCastlingQueen, this.whiteCastlingKing, this.blackCastlingKing, this.blackCastlingQueen, this.pieceMap);
         if(move.getPieceIndex()==4){
             whiteCastlingQueen = false;
             whiteCastlingKing = false;

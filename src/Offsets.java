@@ -1,5 +1,3 @@
-package AI;
-
 /**
  * Holds the values of the pieces, directions for scope pieces.
  * Helps the AI focus on better squares with their pieces.

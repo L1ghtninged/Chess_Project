@@ -1,5 +1,3 @@
-package AI;
-
 import java.util.Objects;
 
 /**
