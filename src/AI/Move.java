@@ -2,6 +2,9 @@ package AI;
 
 import java.util.Objects;
 
+/**
+ * Structure class for a chess move, contains a pieceIndex(FROM) and a positionIndex(TO)
+ */
 public class Move{
     private int pieceIndex;
     private int positionIndex;

@@ -69,6 +69,10 @@ public class ChessGame {
         boards.add(board);
     }
 
+    /**
+     * AI finds the best move, and plays it.
+     * @param depth - AI searches to this depth
+     */
     public void playMoveAI(int depth){
 
         Move move = AI.findBestMove(this, depth);
@@ -79,5 +83,62 @@ public class ChessGame {
 
     }
 
+    /**
+     * Determines, whether the game is a draw
+     * @return boolean - true, if the game is a draw
+     */
+    public boolean isGameDraw(){
+        if(countPieces() == 2){
+            return true;
+        }
+        if(doPawnsRemain()) {
+            return false;
+        }
 
+        return !canCheckmateHappen();
+    }
+
+    /**
+     * Counts the number of pieces
+     * @return int - number of pieces left on the board
+     */
+    private int countPieces(){
+        int numOfPieces = 0;
+        for(int i : board.board){
+            if(i != Piece.none){
+                numOfPieces++;
+            }
+        }
+        return numOfPieces;
+    }
+
+    /**
+     *
+     * @return boolean, true if pawns still remain
+     */
+    private boolean doPawnsRemain(){
+
+        for(int i : board.board){
+            if((i & 0b111) == Piece.pawn){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return boolean, true if material is too low to checkmate
+     */
+    private boolean canCheckmateHappen(){
+        int material = 0;
+        for(int i  : board.board){
+            material += Offsets.getPieceValue(i & 0b111);
+        }
+        if(material > 3){
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -49,14 +49,7 @@ public class MoveOrdering {
     private boolean isCapture(Move move, Board board){
         return board.board[move.getPositionIndex()] != 0;
     }
-    public int findKing(Board board, boolean color){
-        for(int i = 0; i < board.board.length; i++){
-            if((board.board[i] & 0b111) == Piece.king && Piece.getColor(board.board[i] ) == color){
-                return board.board[i];
-            }
-        }
-        return -1;
-    }
+
 
 
 

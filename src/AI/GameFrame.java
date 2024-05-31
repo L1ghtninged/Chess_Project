@@ -2,12 +2,13 @@ package AI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 
+/**
+ * Main GUI class
+ */
 public class GameFrame extends JFrame{
     SettingsPanel panel;
     GamePanel board;
-
 
     public GameFrame(ChessGame game){
         board = new GamePanel(game, panel);

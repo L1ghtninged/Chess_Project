@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**
+ * GUI Board panel, displays pieces and the chessboard
+ */
 public class GamePanel extends JPanel implements MouseListener, KeyListener {
     ChessGame game;
     SettingsPanel settingsPanel;
@@ -25,6 +28,7 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
     Image blackKing;
     public boolean ai = false;
     int targetSquare = -1;
+    boolean gameOver = false;
 
     public GamePanel(ChessGame game, SettingsPanel settings) {
         this.game = game;
@@ -35,7 +39,7 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         this.setFocusTraversalKeysEnabled(false);
         this.setBounds(0, SettingsPanel.PANEL_HEIGHT, GAME_WIDTH, GAME_HEIGHT);
 
-        // Load images
+        // Images from: https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
         whitePawn = new ImageIcon("whitePawn.png").getImage();
         whiteKnight = new ImageIcon("whiteKnight.png").getImage();
         whiteBishop = new ImageIcon("whiteBishop.png").getImage();
@@ -79,10 +83,14 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         requestFocusInWindow();
     }
 
+    /**
+     * Draws the chessboard
+     * @param g - graphics
+     */
     public void drawBoard(Graphics g) {
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                boolean isWhite = (x + y) % 2 == 0;
+                boolean isWhite = (x + y) % 2 == 0; // Square is light if it's divisible by 2
                 if (Main.getIndex(x, (7 - y)) == targetSquare) {
                     new Square(x * SIZE, y * SIZE, g, isWhite, true);
                 } else {
@@ -92,6 +100,10 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         }
     }
 
+    /**
+     * Draws the pieces
+     * @param g - graphics
+     */
     public void drawPieces(Graphics g) {
         for (int y = 7; y >= 0; y--) {
             for (int x = 0; x < 8; x++) {
@@ -114,6 +126,10 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         }
     }
 
+    /**
+     * Behaves like "paint" method
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -121,6 +137,11 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         drawPieces(g);
     }
 
+    /**
+     * Plays a move, and repaints
+     * @param startIndex
+     * @param endIndex
+     */
     public void movePiece(int startIndex, int endIndex) {
         Move move = new Move(startIndex, endIndex);
         Move m = isMoveLegal(move);
@@ -132,35 +153,60 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
             return;
         }
         targetSquare = -1;
-        if(game.aiPlaying){
+        if(game.aiPlaying && ! gameOver){
             game.playMoveAI(4);
         }
 
-
+        //Checks if the game is over
         if(MoveGenerator.generateLegalMoves(game.board.isWhiteToMove, game.board).size() == 0){
-            if(game.board.isWhiteToMove){
-                System.out.println("Black won");
+            Board board = game.board;
+            boolean isWhiteToMove = board.isWhiteToMove;
+
+            if(!MoveGenerator.isSquareAttacked(board, MoveGenerator.findKingPosition(board.board, isWhiteToMove ? Piece.white : Piece.black), !isWhiteToMove)){
+                settingsPanel.changeResultLabel(0);
+            }
+            else if(game.board.isWhiteToMove){
+                settingsPanel.changeResultLabel(2);
             }
             else{
-                System.out.println("White won");
+                settingsPanel.changeResultLabel(1);
             }
+            gameOver = true;
+        }
+        else if(game.isGameDraw()){
+            gameOver = true;
+            settingsPanel.changeResultLabel(0);
         }
         settingsPanel.updatePromotionImage();
         repaint();
     }
 
+    /**
+     * Moves the piece to the destination square if possible.
+     * @param x
+     * @param y
+     */
     public void selectedSquare(int x, int y) {
-        int color = game.board.isWhiteToMove ? Piece.white : Piece.black;
-        int piece = game.board.board[Main.getIndex(x, y)];
-        if (targetSquare == Main.getIndex(x, y)) {
-            targetSquare = -1;
-        } else if ((piece & color) == color) {
-            targetSquare = Main.getIndex(x, y);
-        } else if (targetSquare != -1) {
-            movePiece(targetSquare, Main.getIndex(x, y));
+        if(!gameOver){
+            int color = game.board.isWhiteToMove ? Piece.white : Piece.black;
+            int piece = game.board.board[Main.getIndex(x, y)];
+            if (targetSquare == Main.getIndex(x, y)) {
+                targetSquare = -1;
+            } else if ((piece & color) == color) {
+                targetSquare = Main.getIndex(x, y);
+            } else if (targetSquare != -1) {
+                movePiece(targetSquare, Main.getIndex(x, y));
+            }
+            repaint();
         }
-        repaint();
+
     }
+
+    /**
+     * Determines, what move does the player try to make
+     * @param move - Generic move - just the pieceIndex and the positionIndex
+     * @return
+     */
     private Move isMoveLegal(Move move){
         ArrayList<Move> moves = MoveGenerator.generateLegalMoves(game.board.isWhiteToMove, game.board);
         if(moves.contains(move)){
@@ -208,6 +254,12 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         return null;
     }
 
+    /**
+     * Following methods are implemented from the MouseListener, and KeyListener
+     */
+
+
+
     @Override
     public void mouseClicked(MouseEvent e) {
     }
@@ -248,7 +300,6 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
                 repaint();
             }
         }
-
          */
         if(e.getKeyCode() == 38){
             if(game.chosenPromotion == 3){

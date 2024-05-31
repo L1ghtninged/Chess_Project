@@ -2,8 +2,16 @@ package AI;
 
 import java.util.ArrayList;
 
+/**
+ * Generates all possible moves
+ */
 public class MoveGenerator {
-
+    /**
+     * Finds the position of the king
+     * @param board - chessboard
+     * @param color - Color of the king
+     * @return index of the king
+     */
     public static int findKingPosition(int[] board, int color) {
         for (int i = 0; i < board.length; i++) {
             int piece = board[i];
@@ -14,6 +22,13 @@ public class MoveGenerator {
         return -1;
     }
 
+    /**
+     * Determines, whether a move leaves king in check, therefore can not be played
+     * @param move
+     * @param whiteToMove
+     * @param chessboard
+     * @return boolean, true if the move is not legal
+     */
     public static boolean leavesKingInCheck(Move move, boolean whiteToMove, Board chessboard) {
         int[] board = chessboard.board;
         int[] tempBoard = board.clone();
@@ -23,6 +38,14 @@ public class MoveGenerator {
         int kingPos = findKingPosition(tempBoard, whiteToMove ? Piece.white : Piece.black);
         return isSquareAttacked(b, kingPos, !whiteToMove);
     }
+
+    /**
+     * Checks all enemy moves. If one of them has a positionIndex same as the squareIndex, the square is attacked.
+     * @param chessboard
+     * @param squareIndex
+     * @param byWhite
+     * @return boolean, true if the square is attacked by the enemy
+     */
     public static boolean isSquareAttacked(Board chessboard, int squareIndex, boolean byWhite) {
         int[] board = chessboard.board;
         ArrayList<Move> opponentMoves = generatePseudoLegalMoves(chessboard, byWhite);
@@ -34,6 +57,12 @@ public class MoveGenerator {
         }
         return false;
     }
+
+    /**
+     * Makes a move on a temporary chessboard
+     * @param board
+     * @param move
+     */
     private static void makeMove(int[] board, Move move) {
         // Update the board with the move
         board[move.getPositionIndex()] = board[move.getPieceIndex()];
@@ -66,7 +95,13 @@ public class MoveGenerator {
         }
     }
 
-
+    /**
+     * Generates all possible moves, except those which leave the king in check and special moves.
+     * Those moves are called "pseudo-legal"
+     * @param chessboard
+     * @param whiteToMove
+     * @return list of "pseudo-legal" moves
+     */
     public static ArrayList<Move> generatePseudoLegalMoves(Board chessboard, boolean whiteToMove){
         ArrayList<Move> pseudoMoves = new ArrayList<>();
         int[] board = chessboard.board;
@@ -103,6 +138,14 @@ public class MoveGenerator {
 
         return pseudoMoves;
     }
+
+    /**
+     * Generates all pseudoLegal moves and checks if they are legal
+     * Generates castling and en-passant.
+     * @param whiteToMove
+     * @param chessboard
+     * @return list of all legal moves in a position
+     */
     public static ArrayList<Move> generateLegalMoves(boolean whiteToMove, Board chessboard) {
         ArrayList<Move> legalMoves = new ArrayList<>();
         ArrayList<Move> pseudoMoves = generatePseudoLegalMoves(chessboard, whiteToMove);
@@ -142,6 +185,11 @@ public class MoveGenerator {
         return legalMoves;
     }
 
+    /**
+     * Checks if the white king can castle king-side
+     * @param board
+     * @return boolean, true if castling is legal
+     */
     public static boolean checkWhiteCastlingKing( Board board){
         if(isSquareAttacked(board, 4, false)|isSquareAttacked(board, 5, false)|isSquareAttacked(board, 6, false)){
             return false;
@@ -156,6 +204,11 @@ public class MoveGenerator {
 
         return true;
     }
+    /**
+     * Checks if the white king can castle queen-side
+     * @param board
+     * @return boolean, true if castling is legal
+     */
     public static boolean checkWhiteCastlingQueen( Board board){
         if(isSquareAttacked(board, 4, false)|isSquareAttacked(board, 3, false)|isSquareAttacked(board, 2, false)){
             return false;
@@ -170,7 +223,11 @@ public class MoveGenerator {
 
         return true;
     }
-    // dodělat    black castling
+    /**
+     * Checks if the black king can castle king-side
+     * @param board
+     * @return boolean, true if castling is legal
+     */
     public static boolean checkBlackCastlingKing(Board board){
         if(isSquareAttacked(board, 60, true)|isSquareAttacked(board, 61, true)|isSquareAttacked(board, 62, true)){
             return false;
@@ -185,6 +242,11 @@ public class MoveGenerator {
 
         return true;
     }
+    /**
+     * Checks if the black king can castle queen-side
+     * @param board
+     * @return boolean, true if castling is legal
+     */
     public static boolean checkBlackCastlingQueen(Board board){
         if(isSquareAttacked(board, 60, true)|isSquareAttacked(board, 59, true)|isSquareAttacked(board, 58, true)){
             return false;

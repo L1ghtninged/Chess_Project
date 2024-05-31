@@ -6,7 +6,6 @@ import java.util.ArrayList;
  */
 public class AI {
     public static final MoveOrdering ordering = new MoveOrdering();
-    public static int positions = 0;
     public static final int positiveInfinity = 100000;
     public static final int negativeInfinity = -positiveInfinity;
 
@@ -70,6 +69,7 @@ public class AI {
 
     /**
      * Recursive function, searches and evaluates moves into the future
+     * Uses "alpha-beta pruning"
      * @param depth
      * @param alpha - The best evaluation
      * @param beta - Worst evaluation
@@ -78,7 +78,6 @@ public class AI {
      */
     public static int search(int depth, int alpha, int beta, Board board) {
         if (depth == 0) {
-            positions++;
             return evaluate(board);
         }
 
@@ -146,14 +145,12 @@ public class AI {
             }
             alpha = Math.max(alpha, evaluation);
         }
-        System.out.println(positions);
-        positions = 0;
         System.out.println("Best move: "+bestMove+" eval: "+bestEvaluation);
         return bestMove;
     }
 
     /**
-     *
+     * https://github.com/SebLague/Chess-Coding-Adventure/tree/Chess-V1-Unity
      * @param friendlyKingIndex - Index of the friendly king
      * @param opponentKingIndex - Index of the opponents king
      * @param endGameWeight - Final evaluation is being multiplied by this

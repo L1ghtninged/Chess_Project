@@ -1,5 +1,9 @@
 package AI;
 
+/**
+ * Holds the values of the pieces, directions for scope pieces.
+ * Helps the AI focus on better squares with their pieces.
+ */
 public class Offsets {
     public static final int pawnValue = 100;
     public static final int knightValue = 300;
@@ -113,6 +117,14 @@ public class Offsets {
             {-30, -30, 0, 0, 0, 0, -30, -30},
             {-50, -30, -30, -30, -30, -30, -30, -50}
     };
+
+    /**
+     * Gets the value of a piece for the AI
+     * @param piece
+     * @return int value of a piece relative to a pawn(100)
+     */
+
+
     public static int getPieceValue(int piece){
         int p = piece & 0b111;
 
@@ -126,11 +138,18 @@ public class Offsets {
             default -> 0;
         };
     }
+
+    /**
+     * Gets the value of a piece position for the AI
+     * @param piece
+     * @param pieceIndex
+     * @return int value of a piece position based on the piece
+     */
     public static int getPositionValue(int piece, int pieceIndex){
         int p = piece & 0b111;
         int rank = Main.getRank(pieceIndex);
         int file = Main.getFile(pieceIndex);
-        if(!Piece.getColor(piece)){
+        if(!Piece.getColor(piece)){ // Flips the values for black
             rank = 7 - rank;
         }
         return switch(p){
@@ -145,6 +164,13 @@ public class Offsets {
 
 
     }
+
+    /**
+     * Gets the value of a piece position for the AI in the endgame
+     * @param piece
+     * @param pieceIndex
+     * @return int value of a piece position based on the piece in the endgame
+     */
     public static int getEndgamePositionValue(int piece, int pieceIndex){
         int p = piece & 0b111;
         int sign = Piece.getColor(piece) ? 1 : -1;

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="AI upgrade">
+    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Buttons for new game added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/AI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/ChessGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/ChessGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/GameFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/MoveGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/MoveGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/MoveOrdering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/MoveOrdering.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/Offsets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Offsets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI/SettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/SettingsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI/Square.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +49,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RunManager">
@@ -129,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716910354621</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Buttons for new game added.">
+      <created>1717150882220</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717150882220</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,7 +161,8 @@
     <MESSAGE value="Castling bug fixed, promotion choosing added." />
     <MESSAGE value="Basic AI added." />
     <MESSAGE value="AI upgrade" />
-    <option name="LAST_COMMIT_MESSAGE" value="AI upgrade" />
+    <MESSAGE value="Buttons for new game added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Buttons for new game added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

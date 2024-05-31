@@ -2,6 +2,10 @@ package AI;
 
 import java.util.ArrayList;
 
+/**
+ * Holds the placeholders for all pieces
+ * Works well with binary operations
+ */
 public class Piece {
     public final static int none = 0; // 00000
     public final static int king = 1; // 00001
@@ -14,21 +18,44 @@ public class Piece {
     public final static int white = 8; // 01000
     public final static int black = 16; // 10000
 
+    /**
+     * Gets the color of a piece
+     * @param piece
+     * @return boolean, true if white, false if black
+     */
     public static boolean getColor(int piece){
 
         return (piece & Piece.white) != 0;
     }
+
+    /**
+     * Determines, whether the square exists on the chessboard
+     * @param x square's coordinate
+     * @param y square's coordinate
+     * @return boolean, true if square is valid
+     */
     private static boolean isValidSquare(int x, int y){
         return x < 8 && x > -1 && y < 8 && y > -1;
     }
+
+    /**
+     * Determines, whether the square exists on the chessboard
+     * @param square 1D version
+     * @return boolean, true if square is valid
+     */
     private static boolean isValidSquare(int square){
         return square < 64 && square > -1;
     }
 
 
-
-
-
+    /**
+     * Gets all possible pawn moves for a square(x,y)
+     *
+     * @param x pawn's coordinate
+     * @param y pawn's coordinate
+     * @param chessboard
+     * @return list of pawn moves
+     */
     public static ArrayList<Move> getPawnMoves(int x, int y, Board chessboard) {
         int[] board = chessboard.board;
         int piece = board[Main.getIndex(x, y)];
@@ -36,7 +63,7 @@ public class Piece {
         boolean white = getColor(piece);
 
 
-        if(white){
+        if(white){ // white color
             // Check if the pawn can move 1 square forward
             if(board[Main.getIndex(x,y+1)]==0){
 
@@ -76,7 +103,7 @@ public class Piece {
 
 
         }
-        else{
+        else{ // black color
             // Check if the pawn can move 1 square forward
             if(board[Main.getIndex(x,y-1)]==0){
 
@@ -116,7 +143,7 @@ public class Piece {
 
         }
 
-        if (chessboard.enPassantTarget != -1) {
+        if (chessboard.enPassantTarget != -1) { // checks for enPassant
             int enPassantX = Main.getFile(chessboard.enPassantTarget);
             int enPassantY = Main.getRank(chessboard.enPassantTarget);
             boolean whiteToMove = getColor(board[Main.getIndex(x, y)]);
@@ -131,6 +158,14 @@ public class Piece {
         return moves;
     }
 
+    /**
+     * Gets all possible knight moves for a square(x,y)
+     * Based on the Offsets directions for the knight
+     * @param x knight's coordinate
+     * @param y knight's coordinate
+     * @param board
+     * @return list of knight moves
+     */
     public static ArrayList<Move> getKnightMoves(int x, int y, int[] board) {
         ArrayList<Move> moves = new ArrayList<>();
         int color = black;
@@ -153,7 +188,14 @@ public class Piece {
 
         return moves;
     }
-
+    /**
+     * Gets all possible bishop moves for a square(x,y)
+     * Based on the Offsets directions for the bishop
+     * @param x bishop's coordinate
+     * @param y bishop's coordinate
+     * @param board
+     * @return list of bishop moves
+     */
     public static ArrayList<Move> getBishopMoves(int x, int y, int[] board) {
         ArrayList<Move> moves = new ArrayList<>();
         boolean color = getColor(board[Main.getIndex(x,y)]);
@@ -181,7 +223,14 @@ public class Piece {
         }
         return moves;
     }
-
+    /**
+     * Gets all possible rook moves for a square(x,y)
+     * Based on the Offsets directions for the rook
+     * @param x rook's coordinate
+     * @param y rook's coordinate
+     * @param board
+     * @return list of rook moves
+     */
     public static ArrayList<Move> getRookMoves(int x, int y, int[] board) {
         ArrayList<Move> moves = new ArrayList<>();
         boolean color = getColor(board[Main.getIndex(x,y)]);
@@ -209,14 +258,28 @@ public class Piece {
         }
         return moves;
     }
-
+    /**
+     * Gets all possible knight queen for a square(x,y)
+     * Adds the bishop and rook moves together
+     * @param x queen's coordinate
+     * @param y queen's coordinate
+     * @param board
+     * @return queen of knight moves
+     */
     public static ArrayList<Move> getQueenMoves(int x, int y, int[] board) {
         ArrayList<Move> moves = new ArrayList<>();
         moves.addAll(getBishopMoves(x,y,board));
         moves.addAll(getRookMoves(x,y,board));
         return moves;
     }
-
+    /**
+     * Gets all possible king moves for a square(x,y)
+     * Doesn't react to checks
+     * @param x king's coordinate
+     * @param y king's coordinate
+     * @param board
+     * @return list of king moves
+     */
     public static ArrayList<Move> getKingMoves(int x, int y, int[] board) {
         ArrayList<Move> moves = new ArrayList<>();
         boolean color = getColor(board[Main.getIndex(x,y)]);

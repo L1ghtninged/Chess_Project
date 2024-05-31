@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * Graphical square
+ */
 public class Square extends Rectangle{
 
     boolean isTargetSquare = false;
@@ -23,6 +26,11 @@ public class Square extends Rectangle{
         drawColor(g, isWhite);
     }
 
+    /**
+     * Draws this square
+     * @param g
+     * @param isWhite
+     */
     public void draw(Graphics g, boolean isWhite) {
         if (isWhite) {
             g.setColor(new Color(253, 234, 217));
@@ -32,6 +40,7 @@ public class Square extends Rectangle{
         g.fillRect(x, y, width, height);
 
     }
+    // Draws this square highlighted
     public void drawColor(Graphics g, boolean isWhite){
         if (isWhite) {
             g.setColor(new Color(229, 252, 116));

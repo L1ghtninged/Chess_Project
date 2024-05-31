@@ -5,11 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Settings panel for the game.
+ */
 public class SettingsPanel extends JPanel implements ActionListener {
     ChessGame game;
     GamePanel board;
     public static final int PANEL_WIDTH = 600;
     public static final int PANEL_HEIGHT = 100;
+    public static final int BUTTON_WIDTH = 150;
+    public static final int BUTTON_HEIGHT = 85;
+    public static final int GAP = 10;
     Image whitePawn;
     Image whiteKnight;
     Image whiteBishop;
@@ -24,12 +30,14 @@ public class SettingsPanel extends JPanel implements ActionListener {
     Image blackKing;
     JButton newGameAI;
     JButton newGame;
+    JLabel result;
 
     public SettingsPanel(ChessGame game, GamePanel board){
         this.board = board;
         this.game = game;
         this.setFocusable(true);
         this.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
+        // Images from: https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
         whitePawn = new ImageIcon("whitePawn.png").getImage();
         whiteKnight = new ImageIcon("whiteKnight.png").getImage();
         whiteBishop = new ImageIcon("whiteBishop.png").getImage();
@@ -45,28 +53,40 @@ public class SettingsPanel extends JPanel implements ActionListener {
 
         newGameAI = new JButton();
         newGameAI.setFocusable(false);
-        newGameAI.setBounds(120, 0, 200, 85);
+        newGameAI.setBounds(100, 0, BUTTON_WIDTH, BUTTON_HEIGHT);
         newGameAI.setVisible(true);
-        newGameAI.setText("NEW GAME AGAINST AI");
+        newGameAI.setText("NEW GAME AI");
         newGameAI.addActionListener(this);
 
         newGame = new JButton();
         newGame.setFocusable(false);
-        newGame.setBounds(320, 0, 200, 85);
+        newGame.setBounds(newGameAI.getX() + BUTTON_WIDTH + GAP, 0, BUTTON_WIDTH, BUTTON_HEIGHT);
         newGame.setVisible(true);
         newGame.setText("NEW GAME");
         newGame.addActionListener(this);
 
+        result = new JLabel("Draw");
+        result.setVisible(false);
+        result.setBounds(newGame.getX() + BUTTON_WIDTH, 20, 400, 50);
+        result.setFont(new Font("MV Boli", Font.BOLD, 30));
         this.add(newGameAI);
         this.add(newGame);
+        this.add(result);
         this.setLayout(null);
     }
 
-
+    /**
+     * Calls the method repaint for this panel
+     */
     public void updatePromotionImage(){
         repaint();
     }
 
+    /**
+     * Behaves like the paint method
+     * To call this method - repaint()
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -86,6 +106,10 @@ public class SettingsPanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Loads a new game when a button is clicked
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -100,6 +124,28 @@ public class SettingsPanel extends JPanel implements ActionListener {
 
             board.repaint();
         }
+        result.setVisible(false);
+        board.gameOver = false;
         updatePromotionImage();
     }
+
+    /**
+     * Displays the result of the game
+     * @param res
+     */
+    public void changeResultLabel(int res){
+        if(res == 0){
+            result.setText("Draw");
+        }
+        else if(res == 1){
+            result.setText("White won");
+        }
+        else if(res == 2){
+            result.setText("Black won");
+        }
+        result.setVisible(true);
+
+    }
+
+
 }
