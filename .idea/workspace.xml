@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Chess_Project:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Fixed castling bug">
+    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Proper main class, removed package">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Chess_Project_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/blackBishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/blackKing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/blackKnight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/blackPawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/blackQueen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/blackRook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/whiteBishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/whiteKing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/whiteKnight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/whitePawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/whiteQueen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/whiteRook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/ChessGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/MoveGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MoveGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/MoveOrdering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MoveOrdering.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Offsets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Offsets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/SettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SettingsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/Testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Testing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,13 +63,25 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/bibis/IdeaProjects/Chess_Project/out/artifacts/Chess_Project_jar",
     "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "configurable.group.appearance"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out\artifacts\Chess_Project_jar" />
+      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out\artifacts\Chess_Project_jar" />
+      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JAR Application.Chess_Project.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Chess_Project" />
@@ -82,8 +104,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Chess_Project.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Chess_Project_jar/Chess_Project.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Chess.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/ChessProject/Chess.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.Chess_Project.jar" />
+        <item itemvalue="JAR Application.Chess.jar" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.Testing" />
       </list>
@@ -189,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717173730664</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Proper main class, removed package">
+      <created>1717175402295</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1717175402295</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,7 +255,8 @@
     <MESSAGE value="Javadocs" />
     <MESSAGE value="Testing added" />
     <MESSAGE value="Fixed castling bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed castling bug" />
+    <MESSAGE value="Proper main class, removed package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Proper main class, removed package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
