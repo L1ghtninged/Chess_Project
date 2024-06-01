@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Jar file added">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +246,21 @@
       <option name="project" value="LOCAL" />
       <updated>1717247070906</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Jar file added">
+      <created>1717247169393</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1717247169393</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Jar file added">
+      <created>1717247204583</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1717247204583</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
