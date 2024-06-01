@@ -6,28 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Proper main class, removed package">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Chess_Project_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/blackBishop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/blackKing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/blackKnight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/blackPawn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/blackQueen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/blackRook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/whiteBishop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/whiteKing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/whiteKnight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/whitePawn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/whiteQueen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/whiteRook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" />
-    </list>
+    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Jar file added" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -228,7 +207,21 @@
       <option name="project" value="LOCAL" />
       <updated>1717175402295</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Jar file added">
+      <created>1717245953705</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1717245953705</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Jar file added">
+      <created>1717246095365</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1717246095365</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -256,7 +249,8 @@
     <MESSAGE value="Testing added" />
     <MESSAGE value="Fixed castling bug" />
     <MESSAGE value="Proper main class, removed package" />
-    <option name="LAST_COMMIT_MESSAGE" value="Proper main class, removed package" />
+    <MESSAGE value="Jar file added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jar file added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
