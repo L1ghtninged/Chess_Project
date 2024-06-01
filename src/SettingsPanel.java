@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 /**
  * Settings panel for the game.
@@ -36,18 +37,18 @@ public class SettingsPanel extends JPanel implements ActionListener {
         this.setFocusable(true);
         this.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
         // Images from: https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
-        whitePawn = new ImageIcon("whitePawn.png").getImage();
-        whiteKnight = new ImageIcon("whiteKnight.png").getImage();
-        whiteBishop = new ImageIcon("whiteBishop.png").getImage();
-        whiteRook = new ImageIcon("whiteRook.png").getImage();
-        whiteKing = new ImageIcon("whiteKing.png").getImage();
-        whiteQueen = new ImageIcon("whiteQueen.png").getImage();
-        blackPawn = new ImageIcon("blackPawn.png").getImage();
-        blackKnight = new ImageIcon("blackKnight.png").getImage();
-        blackBishop = new ImageIcon("blackBishop.png").getImage();
-        blackRook = new ImageIcon("blackRook.png").getImage();
-        blackKing = new ImageIcon("blackKing.png").getImage();
-        blackQueen = new ImageIcon("blackQueen.png").getImage();
+        whitePawn = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whitePawn.png"))).getImage();
+        whiteKnight = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteKnight.png"))).getImage();
+        whiteBishop = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteBishop.png"))).getImage();
+        whiteRook = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteRook.png"))).getImage();
+        whiteKing = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteKing.png"))).getImage();
+        whiteQueen = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteQueen.png"))).getImage();
+        blackPawn = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackPawn.png"))).getImage();
+        blackKnight = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackKnight.png"))).getImage();
+        blackBishop = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackBishop.png"))).getImage();
+        blackRook = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackRook.png"))).getImage();
+        blackKing = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackKing.png"))).getImage();
+        blackQueen = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackQueen.png"))).getImage();
 
         newGameAI = new JButton();
         newGameAI.setFocusable(false);
