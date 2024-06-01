@@ -6,7 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Jar file added" />
+    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Jar file added">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,7 +46,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/bibis/IdeaProjects/Chess_Project/out",
+    "last_opened_file_path": "C:/Users/bibis/IdeaProjects/Chess_Project/out/artifacts/Chess_Project_jar",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -53,11 +56,12 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out\artifacts\Chess_Project_jar" />
+      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project" />
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out" />
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out\artifacts\Chess_Project_jar" />
+      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out" />
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project" />
     </key>
   </component>
@@ -236,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717246735984</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Jar file added">
+      <created>1717247070906</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1717247070906</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
