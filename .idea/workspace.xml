@@ -6,12 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Jar file added">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess_Project.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Chess_Project.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Chess_Project/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chess_Project/GamePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Jar file added" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/bibis/IdeaProjects/Chess_Project/out/artifacts/Chess_Project_jar",
+    "last_opened_file_path": "C:/Users/bibis/IdeaProjects/Chess_Project/resources",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -57,6 +52,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\resources" />
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out\artifacts\Chess_Project_jar" />
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project" />
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\images" />
@@ -290,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717248047951</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Jar file added">
+      <created>1717248708423</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1717248708423</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
