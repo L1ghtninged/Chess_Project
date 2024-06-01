@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * GUI Board panel, displays pieces and the chessboard
@@ -38,18 +39,18 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         this.setBounds(0, SettingsPanel.PANEL_HEIGHT, GAME_WIDTH, GAME_HEIGHT);
 
         // Images from: https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
-        whitePawn = new ImageIcon(getClass().getClassLoader().getResource("whitePawn.png")).getImage();
-        whiteKnight = new ImageIcon(getClass().getClassLoader().getResource("whiteKnight.png")).getImage();
-        whiteBishop = new ImageIcon(getClass().getClassLoader().getResource("whiteBishop.png")).getImage();
-        whiteRook = new ImageIcon(getClass().getClassLoader().getResource("whiteRook.png")).getImage();
-        whiteKing = new ImageIcon(getClass().getClassLoader().getResource("whiteKing.png")).getImage();
-        whiteQueen = new ImageIcon(getClass().getClassLoader().getResource("whiteQueen.png")).getImage();
-        blackPawn = new ImageIcon(getClass().getClassLoader().getResource("blackPawn.png")).getImage();
-        blackKnight = new ImageIcon(getClass().getClassLoader().getResource("blackKnight.png")).getImage();
-        blackBishop = new ImageIcon(getClass().getClassLoader().getResource("blackBishop.png")).getImage();
-        blackRook = new ImageIcon(getClass().getClassLoader().getResource("blackRook.png")).getImage();
-        blackKing = new ImageIcon(getClass().getClassLoader().getResource("blackKing.png")).getImage();
-        blackQueen = new ImageIcon(getClass().getClassLoader().getResource("blackQueen.png")).getImage();
+        whitePawn = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whitePawn.png"))).getImage();
+        whiteKnight = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteKnight.png"))).getImage();
+        whiteBishop = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteBishop.png"))).getImage();
+        whiteRook = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteRook.png"))).getImage();
+        whiteKing = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteKing.png"))).getImage();
+        whiteQueen = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("whiteQueen.png"))).getImage();
+        blackPawn = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackPawn.png"))).getImage();
+        blackKnight = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackKnight.png"))).getImage();
+        blackBishop = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackBishop.png"))).getImage();
+        blackRook = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackRook.png"))).getImage();
+        blackKing = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackKing.png"))).getImage();
+        blackQueen = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("blackQueen.png"))).getImage();
     }
     public GamePanel(ChessGame game, SettingsPanel settings, boolean ai) {
         this.ai = ai;

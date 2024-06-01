@@ -7,6 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91ab5d04-ebc2-425e-a78a-3f43220d967d" name="Changes" comment="Jar file added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess_Project.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Chess_Project.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chess_Project/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chess_Project/GamePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +68,7 @@
       <recent name="C:\Users\bibis\IdeaProjects\Chess_Project\out" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.Chess_Project.jar">
+  <component name="RunManager" selected="JAR Application.Chess_Project.jar (1)">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Chess_Project" />
@@ -88,6 +91,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Chess_Project.jar (1)" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/Chess_Project.jar" />
+      <method v="2" />
+    </configuration>
     <configuration name="Chess_Project.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Chess_Project_jar/Chess_Project.jar" />
       <method v="2" />
@@ -98,6 +105,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.Chess_Project.jar (1)" />
         <item itemvalue="JAR Application.Chess_Project.jar" />
         <item itemvalue="JAR Application.Chess.jar" />
         <item itemvalue="Application.Main" />
@@ -275,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717247834371</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Jar file added">
+      <created>1717248047951</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1717248047951</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
