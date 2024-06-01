@@ -38,18 +38,18 @@ public class GamePanel extends JPanel implements MouseListener, KeyListener {
         this.setBounds(0, SettingsPanel.PANEL_HEIGHT, GAME_WIDTH, GAME_HEIGHT);
 
         // Images from: https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
-        whitePawn = new ImageIcon("whitePawn.png").getImage();
-        whiteKnight = new ImageIcon("whiteKnight.png").getImage();
-        whiteBishop = new ImageIcon("whiteBishop.png").getImage();
-        whiteRook = new ImageIcon("whiteRook.png").getImage();
-        whiteKing = new ImageIcon("whiteKing.png").getImage();
-        whiteQueen = new ImageIcon("whiteQueen.png").getImage();
-        blackPawn = new ImageIcon("blackPawn.png").getImage();
-        blackKnight = new ImageIcon("blackKnight.png").getImage();
-        blackBishop = new ImageIcon("blackBishop.png").getImage();
-        blackRook = new ImageIcon("blackRook.png").getImage();
-        blackKing = new ImageIcon("blackKing.png").getImage();
-        blackQueen = new ImageIcon("blackQueen.png").getImage();
+        whitePawn = new ImageIcon("images\\whitePawn.png").getImage();
+        whiteKnight = new ImageIcon("images\\whiteKnight.png").getImage();
+        whiteBishop = new ImageIcon("images\\whiteBishop.png").getImage();
+        whiteRook = new ImageIcon("images\\whiteRook.png").getImage();
+        whiteKing = new ImageIcon("images\\whiteKing.png").getImage();
+        whiteQueen = new ImageIcon("images\\whiteQueen.png").getImage();
+        blackPawn = new ImageIcon("images\\blackPawn.png").getImage();
+        blackKnight = new ImageIcon("images\\blackKnight.png").getImage();
+        blackBishop = new ImageIcon("images\\blackBishop.png").getImage();
+        blackRook = new ImageIcon("images\\blackRook.png").getImage();
+        blackKing = new ImageIcon("images\\blackKing.png").getImage();
+        blackQueen = new ImageIcon("images\\blackQueen.png").getImage();
     }
     public GamePanel(ChessGame game, SettingsPanel settings, boolean ai) {
         this.ai = ai;
